@@ -25,7 +25,7 @@ public class ProductController extends HttpServlet {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
 
-//        Map params = new HashMap<>();
+//        Map<String, Object> params = new HashMap<>();
 //        params.put("category", productCategoryDataStore.find(1));
 //        params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
 
