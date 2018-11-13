@@ -18,23 +18,29 @@
                 <strong>FILTER PRODUCTS</strong>
                 <form action="/" method="GET" class="form-horizontal">
                     <div class="row">
-
                         <div class="col-md-2">
                             <h4>CATEGORIES</h4>
                             <select name="category" class="form-control">
+                                <option selected disabled hidden>Categories</option>
                                 <option th:each="cat,iterStat : ${categories}" th:value="${cat.id}"
                                         th:text="${cat.name}"></option>
                             </select>
                         </div>
+                        <button type="submit" class="btn btn-outline-success">Filter by</button>
+                    </div>
+                </form>
+                <form action="/" method="GET" class="form-horizontal">
+                    <div class="row">
                         <div class="col-md-2">
                             <h4>SUPPLIERS</h4>
                             <select name="supplier" class="form-control">
+                                <option selected disabled hidden>Suppliers</option>
                                 <option th:each="supp,iterStat : ${suppliers}" th:value="${supp.id}"
                                         th:text="${supp.name}"></option>
                             </select>
                         </div>
                         <br><br>
-                        <button type="submit" class="btn btn-outline-success">Order by</button>
+                        <button type="submit" class="btn btn-outline-success">Filter by</button>
                     </div>
                 </form>
 
