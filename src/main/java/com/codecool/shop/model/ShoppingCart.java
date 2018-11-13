@@ -3,11 +3,13 @@ package com.codecool.shop.model;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class ShoppingCart {
     private String user;
     private LocalDateTime orderPlacedDate;
-    private HashMap products;
+    private HashMap products = new HashMap();
     private Boolean isActive = true;
 
     public LocalDateTime getOrderPlacedDate() {
@@ -48,6 +50,19 @@ public class ShoppingCart {
         if (!products.isEmpty() && products.containsKey(product)) {
             products.remove(product);
         }
+    }
+
+    public float getTotalPrice() {
+        float totalPrice = 0;
+        if (!products.isEmpty()) {
+            Iterator it = products.entrySet().iterator();
+            while (it.hasNext()) {
+                Map.Entry entry = (Map.Entry)it.next();
+                Product prod = ((Product) entry.getKey());
+                totalPrice += prod.getPriceFloat() * (int)entry.getValue();
+            }
+        }
+        return totalPrice;
     }
 
 //    public void editNumOfProducts(Product product) {

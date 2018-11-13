@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.*;
 
 @WebServlet(urlPatterns = {"/cart"})
 public class ShoppingCartPage extends HttpServlet {
@@ -30,11 +31,25 @@ public class ShoppingCartPage extends HttpServlet {
 
         ShoppingCart userCart = shoppingCartDataStore.getUserCart("sanya");
 
+
+        HashMap productHashMap = userCart.getProducts();
+
+        List<Product> products = new ArrayList<Product>();
+
+        Iterator it = productHashMap.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry entry = (Map.Entry)it.next();
+            products.add((Product) entry.getKey());
+        }
+
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
         context.setVariable("userCart", userCart);
-        engine.process("shoppingCartPage.html", context, resp.getWriter());
+        context.setVariable("products", products);
+        context.setVariable("productHashMap", productHashMap);
+
+        engine.process("cart.html", context, resp.getWriter());
     }
 
     @Override
