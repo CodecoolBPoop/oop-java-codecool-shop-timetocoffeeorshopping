@@ -37,7 +37,7 @@ public class ShoppingCartPage extends HttpServlet {
 
         Iterator it = productHashMap.entrySet().iterator();
         while (it.hasNext()) {
-            Map.Entry entry = (Map.Entry)it.next();
+            Map.Entry entry = (Map.Entry) it.next();
             products.add((Product) entry.getKey());
         }
 
@@ -63,7 +63,7 @@ public class ShoppingCartPage extends HttpServlet {
         ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
 
         String command = req.getParameter("command");
-        if (command.equals("editQuantity")){
+        if (command.equals("editQuantity")) {
             System.out.println("newQuantity:" + req.getParameter("newQuantity"));
             int productId = Integer.valueOf(req.getParameter("product").substring(6));
             int newQuantity = Integer.valueOf(req.getParameter("newQuantity"));
@@ -73,7 +73,7 @@ public class ShoppingCartPage extends HttpServlet {
 
             userCart.editProductQuantity(prod, newQuantity);
 
-        } else if (command.equals("removeProduct")){
+        } else if (command.equals("removeProduct")) {
             int productId = Integer.valueOf(req.getParameter("product"));
 
             Product prod = productDataStore.find(productId);

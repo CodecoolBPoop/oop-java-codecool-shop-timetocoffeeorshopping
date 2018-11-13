@@ -2,7 +2,7 @@
 <html class="perfect-scrollbar-off" lang="en" xmlns:th="http://www.thymeleaf.org">
 <!--Header-->
 <div th:replace="Header.html :: header"></div>
-
+<script src="/static/js/addToCart.js" type="text/javascript" defer></script>
 <body class="">
 
 <!--Sidebar-->
@@ -63,7 +63,7 @@
                                 <div class="col-xs-12 col-md-6">
                                     <form method="post">
                                         <input type="hidden" name="addToCart" th:value="${prod.id}">
-                                        <button type="submit" class="btn btn-success" href="/">Add to cart</button>
+                                        <button th:id="${prod.id}" type="submit" class="btn btn-success addToCart">Add to cart</button>
                                     </form>
                                 </div>
                             </div>

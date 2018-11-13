@@ -8,6 +8,7 @@ import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
+import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ShoppingCart;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import org.thymeleaf.TemplateEngine;
@@ -64,4 +65,20 @@ public class ProductController extends HttpServlet {
         engine.process("product/indexv2.html", context, resp.getWriter());
     }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ProductDao productDataStore = ProductDaoMem.getInstance();
+        ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
+
+        String command = req.getParameter("command");
+        if (command.equals("add")) {
+            int productId = Integer.valueOf(req.getParameter("product"));
+
+            Product prod = productDataStore.find(productId);
+            ShoppingCart userCart = shoppingCartDataStore.getUserCart("sanya");
+
+            userCart.addProduct(prod, 1);
+        }
+    }
 }
+
