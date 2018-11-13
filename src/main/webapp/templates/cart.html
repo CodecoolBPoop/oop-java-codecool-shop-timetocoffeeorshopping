@@ -42,7 +42,7 @@
                                 <th></th>
                                 </thead>
                                 <tbody>
-                                <tr th:each="prod: ${products}">
+                                <tr th:each="prod: ${products}" th:attr="id='tr_'+${prod.getId()}">
                                     <td>
                                         TODO: PHOTO
                                     </td>
@@ -51,13 +51,13 @@
                                     <td th:text="${prod.getPrice()}">
                                     </td>
                                     <td>
-                                        <input th:attr="id=${prod.getId()}" class="form-control quantity" type="number"
+                                        <input th:attr="id='input_'+${prod.getId()}" class="form-control quantity" type="number"
                                                th:value="${productHashMap.get(prod)}">
                                     </td>
                                     <td th:text="${#numbers.formatDecimal(prod.getPriceFloat()*productHashMap.get(prod), 0, 'COMMA', 1, 'POINT')}  + ' USD'">
                                     </td>
                                     <td>
-                                        <button th:attr="onclick='removeFromCart('+${prod.getId()}+')'"
+                                        <button th:attr="onclick='removeFromCart('+${prod.getId()}+')'" th:id="'button_'+${prod.getId()}"
                                                 class="btn btn-primary btn-fab btn-round">
                                             <i class="material-icons">delete_forever</i>
                                             <div class="ripple-container"></div>

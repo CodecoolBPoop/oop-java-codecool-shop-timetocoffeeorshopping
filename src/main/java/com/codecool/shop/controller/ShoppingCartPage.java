@@ -65,7 +65,7 @@ public class ShoppingCartPage extends HttpServlet {
         String command = req.getParameter("command");
         if (command.equals("editQuantity")){
             System.out.println("newQuantity:" + req.getParameter("newQuantity"));
-            int productId = Integer.valueOf(req.getParameter("product"));
+            int productId = Integer.valueOf(req.getParameter("product").substring(6));
             int newQuantity = Integer.valueOf(req.getParameter("newQuantity"));
 
             Product prod = productDataStore.find(productId);
@@ -74,7 +74,7 @@ public class ShoppingCartPage extends HttpServlet {
             userCart.editProductQuantity(prod, newQuantity);
 
         } else if (command.equals("removeProduct")){
-            int productId = Integer.valueOf(req.getParameter("command"));
+            int productId = Integer.valueOf(req.getParameter("product"));
 
             Product prod = productDataStore.find(productId);
             ShoppingCart userCart = shoppingCartDataStore.getUserCart("sanya");
