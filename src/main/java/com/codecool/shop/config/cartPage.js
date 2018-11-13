@@ -14,16 +14,25 @@ for (var i = 0; i < inputFields.length; i++) {
     });
 }
 
+function removeFromCart(productId){
+    let data = "command=removeProduct&product=" + input.id;
+    ajaxPost(document.getElementById(productId), data)
+}
+
 function editQuantity(input, data){
+    ajaxPost(input, data, "Quantity updated successfully!");
+}
+
+function ajaxPost(input, data, msg){
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
 
         if (this.readyState == 4 && this.status == 200) {
             input.parentElement().classList.remove("has-danger");
-            showSmallNotification("Quantity updated successfully", "primary");
+            showSmallNotification(msg, "primary");
         }
         if (this.readyState == 4 && this.status !== 200) {
-            showSmallNotification("Could not update quantity!", "danger");
+            showSmallNotification("Could not communicate with server!", "danger");
             input.parentElement().classList.add("has-danger");
         }
     };

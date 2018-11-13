@@ -31,7 +31,6 @@ public class ShoppingCartPage extends HttpServlet {
 
         ShoppingCart userCart = shoppingCartDataStore.getUserCart("sanya");
 
-
         HashMap productHashMap = userCart.getProducts();
 
         List<Product> products = new ArrayList<Product>();
@@ -74,7 +73,7 @@ public class ShoppingCartPage extends HttpServlet {
 
             userCart.editProductQuantity(prod, newQuantity);
 
-        } else if (command.equals("deleteProduct")){
+        } else if (command.equals("removeProduct")){
             int productId = Integer.valueOf(req.getParameter("command"));
 
             Product prod = productDataStore.find(productId);

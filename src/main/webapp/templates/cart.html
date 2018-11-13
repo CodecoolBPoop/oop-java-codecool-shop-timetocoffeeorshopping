@@ -10,7 +10,7 @@
 
 <div class="main-panel">
     <!--Navbar-->
-    <div th:replace="navbar.html :: navbar"> </div>
+    <div th:replace="navbar.html :: navbar"></div>
 
     <div class="content">
         <div class="container-fluid">
@@ -51,14 +51,17 @@
                                     <td th:text="${prod.getPrice()}">
                                     </td>
                                     <td>
-                                        <input th:attr="id=${prod.getId()}" class="form-control quantity" type="number" th:value="${productHashMap.get(prod)}">
+                                        <input th:attr="id=${prod.getId()}" class="form-control quantity" type="number"
+                                               th:value="${productHashMap.get(prod)}">
                                     </td>
                                     <td th:text="${#numbers.formatDecimal(prod.getPriceFloat()*productHashMap.get(prod), 0, 'COMMA', 1, 'POINT')}  + ' USD'">
                                     </td>
                                     <td>
-                                        <button class="btn btn-primary btn-fab btn-round">
+                                        <button th:attr="onclick='removeFromCart('+${prod.getId()}+')'"
+                                                class="btn btn-primary btn-fab btn-round">
                                             <i class="material-icons">delete_forever</i>
-                                            <div class="ripple-container"></div></button>
+                                            <div class="ripple-container"></div>
+                                        </button>
                                     </td>
                                 </tr>
                                 </tbody>
