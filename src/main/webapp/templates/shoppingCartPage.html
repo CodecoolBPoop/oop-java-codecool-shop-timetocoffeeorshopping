@@ -25,37 +25,7 @@
 
 <body class="">
 
-<div class="sidebar" data-color="azure" data-background-color="black" data-image="/static/img/sidebar-1.jpg">
-    <!--
-Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
-
-Tip 2: you can also add an image using data-image tag
--->
-    <div class="logo">
-        <a href="/" class="simple-text logo-normal">
-            Code Shop
-        </a>
-    </div>
-    <div class="sidebar-wrapper">
-        <ul class="nav">
-
-            <li class="nav-item">
-                <a class="nav-link" href="/">
-                    <i class="material-icons">dashboard</i>
-                    <p>Shop</p>
-                </a>
-            </li>
-
-            <li class="nav-item active">
-                <a class="nav-link" href="/cart">
-                    <i class="material-icons">shopping_cart</i>
-                    <p>Cart</p>
-                </a>
-            </li>
-        </ul>
-    </div>
-</div>
-<div class="sidebar-background" style="background-image: url(/static/img/sidebar-1.jpg) "></div>
+<div th:replace="Sidebar.html :: sidebar"> </div>
 
 <div class="main-panel">
     <!-- Navbar -->
@@ -108,74 +78,137 @@ Tip 2: you can also add an image using data-image tag
     </nav>
     <div class="content">
         <div class="container-fluid">
-
-            <div class="row">
-                <div class="col-lg-12 col-md-12">
-                    <div class="card">
-                        <div class="card-header card-header-tabs card-header-primary">
-                            <div class="nav-tabs-navigation">
-                                <div class="nav-tabs-wrapper">
-                                    <span class="nav-tabs-title">Your cart:</span>
-                                    <ul class="nav nav-tabs" data-tabs="tabs">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" href="#profile" data-toggle="tab">
-                                                <i class="material-icons">delete_forever</i> Delete all
-                                                <div class="ripple-container"></div>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#profile" data-toggle="tab">
-                                                <h4><i th:text="${totalCostMsg}"></i>
-                                                    <i class="material-icons">attach_money</i></h4>
-                                                <div class="ripple-container"></div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="tab-content">
-                                <div class="tab-pane active" id="profile">
-                                    <table class="table">
-                                        <tbody>
-                                        <tr th:each="item : ${cartItems}">
-                                            <td>
-                                                <div class="form-check">
-                                                    <label class="form-check-label">
-                                                        <h3 th:text="${item.count}"></h3>
-                                                    </label>
-                                                </div>
-                                            </td>
-                                            <td th:text="${item.product.name}">
-                                            </td>
-                                            <td><h4 th:text="${item.product.defaultPrice}"></h4></td>
-                                            <td><h4 th:text="${item.product.defaultCurrency}"></h4></td>
-                                            <td class="td-actions text-right">
-                                                <form method="post">
-                                                    <button type="submit" href="/cart" rel="tooltip" title=""
-                                                            class="btn btn-primary btn-link"
-                                                            data-original-title="Edit Task">
-                                                        <i class="material-icons">save</i>
-
-                                                    </button>
-                                                </form>
-                                                <form method="post">
-                                                    <input type="hidden" name="delete" th:value="${item.id}">
-                                                    <input type="hidden" name="user" value="sanya">
-                                                    <button type="submit" href="/cart" rel="tooltip" title=""
-                                                            class="btn btn-danger btn-link"
-                                                            data-original-title="Remove">
-                                                        <i class="material-icons">close</i>
-                                                    </button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                            </div>
+            <div class="col-md-12">
+                <div class="card card-plain">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title mt-0"> Items in your shopping cart</h4>
+                        <p class="card-category"> Here is a subtitle for this table</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="">
+                                <tr><th>
+                                    ID
+                                </th>
+                                    <th>
+                                        Name
+                                    </th>
+                                    <th>
+                                        Country
+                                    </th>
+                                    <th>
+                                        City
+                                    </th>
+                                    <th>
+                                        Salary
+                                    </th>
+                                </tr></thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        1
+                                    </td>
+                                    <td>
+                                        Dakota Rice
+                                    </td>
+                                    <td>
+                                        Niger
+                                    </td>
+                                    <td>
+                                        Oud-Turnhout
+                                    </td>
+                                    <td>
+                                        $36,738
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        2
+                                    </td>
+                                    <td>
+                                        Minerva Hooper
+                                    </td>
+                                    <td>
+                                        Curaçao
+                                    </td>
+                                    <td>
+                                        Sinaai-Waas
+                                    </td>
+                                    <td>
+                                        $23,789
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        3
+                                    </td>
+                                    <td>
+                                        Sage Rodriguez
+                                    </td>
+                                    <td>
+                                        Netherlands
+                                    </td>
+                                    <td>
+                                        Baileux
+                                    </td>
+                                    <td>
+                                        $56,142
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        4
+                                    </td>
+                                    <td>
+                                        Philip Chaney
+                                    </td>
+                                    <td>
+                                        Korea, South
+                                    </td>
+                                    <td>
+                                        Overland Park
+                                    </td>
+                                    <td>
+                                        $38,735
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        5
+                                    </td>
+                                    <td>
+                                        Doris Greene
+                                    </td>
+                                    <td>
+                                        Malawi
+                                    </td>
+                                    <td>
+                                        Feldkirchen in Kärnten
+                                    </td>
+                                    <td>
+                                        $63,542
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        6
+                                    </td>
+                                    <td>
+                                        Mason Porter
+                                    </td>
+                                    <td>
+                                        Chile
+                                    </td>
+                                    <td>
+                                        Gloucester
+                                    </td>
+                                    <td>
+                                        $78,615
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

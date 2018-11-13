@@ -8,7 +8,7 @@ public class ShoppingCart {
     private String user;
     private LocalDateTime orderPlacedDate;
     private HashMap products;
-    private Boolean isActive;
+    private Boolean isActive = true;
 
     public LocalDateTime getOrderPlacedDate() {
         return orderPlacedDate;
