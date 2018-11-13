@@ -25,17 +25,23 @@ public class ProductController extends HttpServlet {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
 
-//        Map params = new HashMap<>();
-//        params.put("category", productCategoryDataStore.find(1));
-//        params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
-
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-//        context.setVariables(params);
-        context.setVariable("recipient", "World");
-        context.setVariable("category", productCategoryDataStore.find(1));
-        context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(1)));
+
         context.setVariable("page", "index");
+
+        context.setVariable("categories", productCategoryDataStore.getAll());
+
+        if (req.getParameter("category") != null) {
+            context.setVariable("products", productDataStore.getBy
+                    (productCategoryDataStore.find(Integer.valueOf(req.getParameter("category")))));
+            System.out.println(productCategoryDataStore.find(Integer.valueOf(req.getParameter("category"))));
+            context.setVariable("category", productCategoryDataStore.find
+                    (Integer.parseInt(req.getParameter("category"))).getName());
+        } else {
+            context.setVariable("products", productDataStore.getAll());
+        }
+
         engine.process("product/indexv2.html", context, resp.getWriter());
     }
 
