@@ -21,6 +21,9 @@ function ajaxPost(productId, action, data, msg) {
             if (action === "remove") {
                 document.getElementById("tr_" + productId).remove();
             }
+            let response = this.response;
+            let input = response;
+            console.log("RESPONSE VALUE:"+input.value);
         }
         if (this.readyState == 4 && this.status !== 200) {
             showSmallNotification("Could not communicate with server! Status: " + this.status, "danger");

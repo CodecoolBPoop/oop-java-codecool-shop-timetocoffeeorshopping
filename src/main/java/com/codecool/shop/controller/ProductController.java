@@ -71,7 +71,7 @@ public class ProductController extends HttpServlet {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
         Enumeration e = req.getParameterNames();
-
+        ShoppingCart userCart = shoppingCartDataStore.getUserCart("sanya");
         while (e.hasMoreElements()){
             String param = e.nextElement().toString();
             System.out.println(param);
@@ -84,11 +84,19 @@ public class ProductController extends HttpServlet {
             int productId = Integer.valueOf(req.getParameter("product"));
 
             Product prod = productDataStore.find(productId);
-            ShoppingCart userCart = shoppingCartDataStore.getUserCart("sanya");
+
 
             userCart.addProduct(prod, 1);
             System.out.println("AddToCart");
+
+            TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
+            WebContext context = new WebContext(req, resp, req.getServletContext());
+
+            context.setVariable("items", userCart.getItemsNumber());
+
+            engine.process("updateItemsNum.html", context, resp.getWriter());
         }
+
     }
 }
 
