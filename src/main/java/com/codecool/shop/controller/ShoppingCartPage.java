@@ -48,6 +48,7 @@ public class ShoppingCartPage extends HttpServlet {
         context.setVariable("userCart", userCart);
         context.setVariable("products", products);
         context.setVariable("productHashMap", productHashMap);
+        context.setVariable("page", "cart");
 
         engine.process("cart.html", context, resp.getWriter());
     }
