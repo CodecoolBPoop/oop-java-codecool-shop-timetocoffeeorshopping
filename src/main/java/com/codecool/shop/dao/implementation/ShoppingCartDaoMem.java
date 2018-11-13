@@ -1,5 +1,6 @@
 package com.codecool.shop.dao.implementation;
 
+import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ShoppingCart;
@@ -49,6 +50,12 @@ public class ShoppingCartDaoMem implements ShoppingCartDao {
         }
         ShoppingCart newCart = new ShoppingCart();
         newCart.setUser(user);
+
+        // Adding items to cart for debugging purposes
+        ProductDao productDataStore = ProductDaoMem.getInstance();
+        for (Product p : productDataStore.getAll()) {
+            newCart.addProduct(p, 5);
+        }
 
         shoppingCarts.add(newCart);
         return newCart;

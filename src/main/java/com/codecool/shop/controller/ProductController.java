@@ -2,9 +2,11 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -24,17 +26,28 @@ public class ProductController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-
-//        Map params = new HashMap<>();
-//        params.put("category", productCategoryDataStore.find(1));
-//        params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
+        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-//        context.setVariables(params);
-        context.setVariable("recipient", "World");
-        context.setVariable("category", productCategoryDataStore.find(1));
-        context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(1)));
+
+        context.setVariable("categories", productCategoryDataStore.getAll());
+        context.setVariable("suppliers", supplierDataStore.getAll());
+
+        if (req.getParameter("category") != null) {
+            context.setVariable("products", productDataStore.getBy
+                    (productCategoryDataStore.find(Integer.valueOf(req.getParameter("category")))));
+            context.setVariable("category", productCategoryDataStore.find
+                    (Integer.parseInt(req.getParameter("category"))).getName());
+        } else if (req.getParameter("supplier") != null) {
+            context.setVariable("products", productDataStore.getBy
+                    (supplierDataStore.find(Integer.valueOf(req.getParameter("supplier")))));
+            context.setVariable("supplier", supplierDataStore.find
+                    (Integer.parseInt(req.getParameter("supplier"))).getName());
+        } else {
+            context.setVariable("products", productDataStore.getAll());
+        }
+
         engine.process("product/indexv2.html", context, resp.getWriter());
     }
 
