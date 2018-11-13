@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -69,6 +70,14 @@ public class ProductController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
+        Enumeration e = req.getParameterNames();
+
+        while (e.hasMoreElements()){
+            String param = e.nextElement().toString();
+            System.out.println(param);
+        }
+
+        System.out.println(e.toString());
 
         String command = req.getParameter("command");
         if (command.equals("add")) {
@@ -78,6 +87,7 @@ public class ProductController extends HttpServlet {
             ShoppingCart userCart = shoppingCartDataStore.getUserCart("sanya");
 
             userCart.addProduct(prod, 1);
+            System.out.println("AddToCart");
         }
     }
 }

@@ -1,8 +1,13 @@
 function showSmallNotification(msg, color) {
-    let icon = "done_outline";
-    if (color == "danger") {
+    let icon = "";
+    if (color == "primary") {
+        icon = "info"
+    } else if (color == "success") {
+        icon = "done_outline"
+    } else if (color == "danger") {
         icon = "error_outline"
     }
+
     $.notify({
         icon: icon,
         message: msg

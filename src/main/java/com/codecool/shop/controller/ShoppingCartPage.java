@@ -74,6 +74,7 @@ public class ShoppingCartPage extends HttpServlet {
             userCart.editProductQuantity(prod, newQuantity);
 
         } else if (command.equals("removeProduct")) {
+            System.out.println("REMOVE:" + req.getParameter("product"));
             int productId = Integer.valueOf(req.getParameter("product"));
 
             Product prod = productDataStore.find(productId);

@@ -1,13 +1,13 @@
 let buttons = document.getElementsByClassName("addToCart");
-
+console.log("buttons:" + buttons.length);
 for (var i = 0; i < buttons.length; i++) {
     let button = buttons[i];
 
     console.log("inputFieldId " + button.id);
 
-    button.addEventListener("change", function () {
+    button.addEventListener("click", function () {
         console.log("Sending add request");
-        editQuantity(input, "command=add&product=" + input.id)
+        ajaxPost(button.id, "add", "command=add&product=" + button.id, "Item added to your cart!")
     });
 }
 
@@ -16,7 +16,7 @@ function ajaxPost(productId, action, data, msg) {
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            showSmallNotification(msg, "primary");
+            showSmallNotification(msg, "success");
             console.log(action);
             if (action === "remove") {
                 document.getElementById("tr_" + productId).remove();
