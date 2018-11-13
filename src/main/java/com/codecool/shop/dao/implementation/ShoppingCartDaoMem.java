@@ -16,7 +16,7 @@ public class ShoppingCartDaoMem implements ShoppingCartDao {
     private static ShoppingCartDaoMem instance = null;
 
     @Override
-    public void cartOrderPlaced(String user) {
+    public void cartProcessed(String user) {
         ShoppingCart userCart = getUserCart(user);
         userCart.isProcessed();
     }
