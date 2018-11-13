@@ -57,12 +57,35 @@ public class ShoppingCart {
         if (!products.isEmpty()) {
             Iterator it = products.entrySet().iterator();
             while (it.hasNext()) {
-                Map.Entry entry = (Map.Entry)it.next();
+                Map.Entry entry = (Map.Entry) it.next();
                 Product prod = ((Product) entry.getKey());
-                totalPrice += prod.getPriceFloat() * (int)entry.getValue();
+                totalPrice += prod.getPriceFloat() * (int) entry.getValue();
             }
         }
         return totalPrice;
+    }
+
+    public int getItemsNumber() {
+        int itmemsNum = 0;
+        if (!products.isEmpty()) {
+            Iterator it = products.entrySet().iterator();
+            while (it.hasNext()) {
+                Map.Entry entry = (Map.Entry) it.next();
+                Product prod = ((Product) entry.getKey());
+                itmemsNum += (int)entry.getValue();
+            }
+        } else {
+            return 0;
+        }
+        return itmemsNum;
+    }
+
+    public void editProductQuantity(Product product, int quantity){
+        if (quantity != 0){
+            products.put(product, quantity);
+        } else {
+            products.remove(product);
+        }
     }
 
 //    public void editNumOfProducts(Product product) {

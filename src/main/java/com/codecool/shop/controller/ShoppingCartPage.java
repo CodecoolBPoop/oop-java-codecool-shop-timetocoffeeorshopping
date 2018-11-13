@@ -48,19 +48,39 @@ public class ShoppingCartPage extends HttpServlet {
         context.setVariable("userCart", userCart);
         context.setVariable("products", products);
         context.setVariable("productHashMap", productHashMap);
-        context.setVariable("page", "cart");
+
+        // Getting number of items in the cart for the navbar
+        context.setVariable("cartItems", userCart.getItemsNumber());
+
+        // Telling the sidebar, which menu should be highlighted
+        context.setVariable("page", "Your shopping cart");
 
         engine.process("cart.html", context, resp.getWriter());
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        String user = req.getParameter("user");
-        Integer cartItemId = Integer.valueOf(req.getParameter("delete"));
-
+        ProductDao productDataStore = ProductDaoMem.getInstance();
         ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
 
-        this.doGet(req, resp);
+        String command = req.getParameter("command");
+        if (command.equals("editQuantity")){
+            System.out.println("newQuantity:" + req.getParameter("newQuantity"));
+            int productId = Integer.valueOf(req.getParameter("product"));
+            int newQuantity = Integer.valueOf(req.getParameter("newQuantity"));
+
+            Product prod = productDataStore.find(productId);
+            ShoppingCart userCart = shoppingCartDataStore.getUserCart("sanya");
+
+            userCart.editProductQuantity(prod, newQuantity);
+
+        } else if (command.equals("deleteProduct")){
+            int productId = Integer.valueOf(req.getParameter("command"));
+
+            Product prod = productDataStore.find(productId);
+            ShoppingCart userCart = shoppingCartDataStore.getUserCart("sanya");
+
+            userCart.removeProduct(prod);
+        }
     }
 }

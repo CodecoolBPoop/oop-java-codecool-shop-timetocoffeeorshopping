@@ -2,9 +2,12 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
+import com.codecool.shop.model.ShoppingCart;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -28,7 +31,13 @@ public class ProductController extends HttpServlet {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
-        context.setVariable("page", "index");
+// Getting number of items in the cart for the navbar
+        ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
+        ShoppingCart userCart = shoppingCartDataStore.getUserCart("sanya");
+        context.setVariable("cartItems", userCart.getItemsNumber());
+
+// Telling the sidebar, which menu should be highlighted
+        context.setVariable("page", "Store");
 
         context.setVariable("categories", productCategoryDataStore.getAll());
 
