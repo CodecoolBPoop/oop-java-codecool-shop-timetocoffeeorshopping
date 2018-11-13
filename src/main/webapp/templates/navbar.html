@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org ">
+
+<<!-- Navbar -->
+
+<nav th:fragment="navbar" class="navbar navbar-inverse navbar-expand-lg bg-dark" role="navigation-demo">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-translate">
+            <a class="navbar-brand" href="#" th:text="${page}"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:text="'Items in cart: ' + ${cartItems}">Items in cart:</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#pablo" class="nav-link">
+                        Discover
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#pablo" class="nav-link">
+                        Wishlist
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#pablo" class="btn btn-rose btn-raised btn-fab btn-round"
+                       data-toggle="dropdown">
+                        <i class="material-icons">email</i>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#pablo">
+
+                        <div class="d-md-block"><i class="material-icons">person</i>
+                            sanya
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-->
+</nav>

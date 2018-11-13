@@ -68,7 +68,7 @@ demo = {
         ctx = document.getElementById('lineChartExample').getContext("2d");
 
         gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
-        gradientStroke.addColorStop(0, '#80b6f4');
+        gradientStroke.addColorStop(0, '#80b6f4');Time
         gradientStroke.addColorStop(1, chartColor);
 
         gradientFill = ctx.createLinearGradient(0, 170, 0, 50);
@@ -329,22 +329,6 @@ demo = {
         marker.setMap(map);
     },
 
-    showNotification: function (from, align) {
-        color = 'primary';
-
-        $.notify({
-            icon: "now-ui-icons ui-1_bell-53",
-            message: "Welcome to <b>Now Ui Dashboard Pro</b> - a beautiful freebie for every web developer."
-
-        }, {
-            type: color,
-            timer: 8000,
-            placement: {
-                from: from,
-                align: align
-            }
-        });
-    }
 
 };
 

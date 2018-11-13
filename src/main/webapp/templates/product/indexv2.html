@@ -9,57 +9,9 @@
 <div th:replace="Sidebar.html :: sidebar"> </div>
 
 <div class="main-panel">
-    <!-- Navbar -->
+    <!--Navbar-->
+    <div th:replace="navbar.html :: navbar"> </div>
 
-    <nav class="navbar navbar-inverse navbar-expand-lg bg-dark" role="navigation-demo">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-translate">
-                <a class="navbar-brand" href="#">Coffee</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                    <span class="navbar-toggler-icon"></span>
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" th:text="'Items in cart: ' + ${cartItems}">Items in cart:</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#pablo" class="nav-link">
-                            Discover
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#pablo" class="nav-link">
-                            Wishlist
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#pablo" class="btn btn-rose btn-raised btn-fab btn-round"
-                           data-toggle="dropdown">
-                            <i class="material-icons">email</i>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#pablo">
-
-                            <div class="d-md-block"><i class="material-icons">person</i>
-                                sanya
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-->
-    </nav>
     <div class="content">
         <div class="container-fluid">
             <div class="well well-sm">
@@ -99,7 +51,7 @@
                 <div class="item col-xs-4 col-lg-4" th:each="prod,iterStat : ${products}">
                     <div class="thumbnail">
                         <img class="group list-group-image" src="http://placehold.it/400x250/000/fff"
-                             th:attr="src='/static/img/' + ${prod.id} + '.jpg'" alt=""/>
+                             th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""/>
                         <div class="caption">
                             <h4 class="group inner list-group-item-heading" th:text="${prod.name}">Product name</h4>
                             <!--<p class="group inner list-group-item-text" th:text="${prod.description}">Product-->
