@@ -1,12 +1,10 @@
 package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.OrderDao;
-import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.ShoppingCart;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class OrderDaoMem implements OrderDao {
@@ -14,7 +12,6 @@ public class OrderDaoMem implements OrderDao {
 
     private List<Order> orders = new ArrayList<>();
     private static OrderDaoMem instance = null;
-    private ShoppingCart shoppingCart;
 
 
     public static OrderDaoMem getInstance() {
@@ -36,13 +33,14 @@ public class OrderDaoMem implements OrderDao {
         Order newOrder = new Order();
         newOrder.setUser(user);
         newOrder.setShoppingCart(user);
+//        newOrder.setCustomer(user);
 
         orders.add(newOrder);
         return newOrder;
     }
 
     @Override
-    public void cartProcessed(String user) {
+    public void orderProcessed(String user) {
         Order order = getUserOrder(user);
         order.isProcessed();
     }

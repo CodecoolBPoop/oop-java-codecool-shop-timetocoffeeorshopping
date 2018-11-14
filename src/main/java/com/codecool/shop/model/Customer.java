@@ -3,11 +3,16 @@ package com.codecool.shop.model;
 public class Customer {
     private int id;
     private static int customerTotalNumber = 0;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String email;
     private int phone;
     private String adressBilling;
     private String adressShipping;
+    private String password;
+    private String city;
+    private String zip;
+
 
     public Customer() {
         id = customerTotalNumber+1;
@@ -18,8 +23,12 @@ public class Customer {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName(String firstname) {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
     public String getEmail() {
@@ -38,8 +47,12 @@ public class Customer {
         return adressShipping;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public void setEmail(String email) {
@@ -56,5 +69,17 @@ public class Customer {
 
     public void setAdressShipping(String adressShipping) {
         this.adressShipping = adressShipping;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
     }
 }
