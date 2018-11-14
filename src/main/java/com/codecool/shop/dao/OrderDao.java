@@ -5,5 +5,7 @@ import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ShoppingCart;
 
 public interface OrderDao {
-    Order find(int id);
+    void cartProcessed(String user);
+
+    Order getUserOrder(String user);
 }

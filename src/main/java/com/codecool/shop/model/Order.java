@@ -1,28 +1,45 @@
 package com.codecool.shop.model;
 
+import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
+
 import java.util.List;
 
 public class Order {
 
     private static int id = 0;
-    private boolean isItActive;
-    private boolean isItPayed;
-    private static List<Order>;
+    private boolean isActive;
+    private boolean isPayed;
     private ShoppingCart shoppingCart;
+    private String user;
 
-    /*
-    we have to add customer as parameter
-     */
-    public Order(ShoppingCart shoppingCart) {
+
+    public Order() {
         id += 1;
-        this.shoppingCart = shoppingCart;
     }
 
-    public void setItActive(boolean itActive) {
-        isItActive = itActive;
+    public ShoppingCart setShoppingCart(String user) {
+        shoppingCart = ShoppingCartDaoMem.getInstance().getUserCart(user);
+        return shoppingCart;
     }
 
-    public void setItPayed(boolean itPayed) {
-        isItPayed = itPayed;
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+
+    public boolean getIsActive() {
+        return isActive;
+    }
+
+    public void isProcessed() {
+        this.isActive = false;
+    }
+
+    public void setIsPayed(boolean itPayed) {
+        isPayed = isPayed;
     }
 }
