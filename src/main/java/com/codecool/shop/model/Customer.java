@@ -9,6 +9,10 @@ public class Customer {
     private int phone;
     private String adressBilling;
     private String adressShipping;
+    private String password;
+    private String city;
+    private String zip;
+
 
     public Customer() {
         id = customerTotalNumber+1;
@@ -65,5 +69,17 @@ public class Customer {
 
     public void setAdressShipping(String adressShipping) {
         this.adressShipping = adressShipping;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
     }
 }
