@@ -3,7 +3,8 @@ package com.codecool.shop.model;
 public class Customer {
     private int id;
     private static int customerTotalNumber = 0;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String email;
     private int phone;
     private String adressBilling;
@@ -18,8 +19,12 @@ public class Customer {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName(String firstname) {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
     public String getEmail() {
@@ -38,8 +43,12 @@ public class Customer {
         return adressShipping;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public void setEmail(String email) {

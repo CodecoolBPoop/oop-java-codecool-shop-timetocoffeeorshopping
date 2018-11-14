@@ -30,6 +30,9 @@ public class Order {
         this.user = user;
     }
 
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
+    }
 
     public boolean getIsActive() {
         return isActive;

@@ -1,12 +1,16 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.ShoppingCartDao;
+import com.codecool.shop.dao.implementation.OrderDaoMem;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
+import com.codecool.shop.model.Customer;
+import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ShoppingCart;
 import org.thymeleaf.TemplateEngine;
@@ -20,20 +24,24 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
 
-@WebServlet(urlPatterns = {"/order"})
+@WebServlet(urlPatterns = {"/checkout"})
 public class OrderPage extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String user = "sanya";
+        Customer customer = new Customer();
 
         resp.setContentType("charset=UTF-8");
 
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
+//        ProductDao productDataStore = ProductDaoMem.getInstance();
+//        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+//        ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
+        OrderDao orderDataStore = OrderDaoMem.getInstance();
 
-        ShoppingCart userCart = shoppingCartDataStore.getUserCart("sanya");
-
+        Order userOrder = orderDataStore.getUserOrder(user);
+        userOrder.setShoppingCart(user);
+        ShoppingCart userCart = userOrder.getShoppingCart();
 
         HashMap productHashMap = userCart.getProducts();
 
@@ -48,21 +56,33 @@ public class OrderPage extends HttpServlet {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
+
         context.setVariable("userCart", userCart);
         context.setVariable("products", products);
         context.setVariable("productHashMap", productHashMap);
 
-        engine.process("cart.html", context, resp.getWriter());
+
+        context.setVariable("page", "Checkout");
+        engine.process("checkout.html", context, resp.getWriter());
+
+        customer.setFirstName(req.getParameter("firstname"));
+        customer.setLastName(req.getParameter("lastname"));
+        customer.setEmail(req.getParameter("firstname"));
+        customer.setLastName(req.getParameter("lastname"));
+        customer.setFirstName(req.getParameter("firstname"));
+        customer.setLastName(req.getParameter("lastname"));
+        customer.setFirstName(req.getParameter("firstname"));
+        customer.setLastName(req.getParameter("lastname"));
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        String user = req.getParameter("user");
-        Integer cartItemId = Integer.valueOf(req.getParameter("delete"));
-
-        ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
-
-        this.doGet(req, resp);
-    }
+//    @Override
+//    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//
+//        String user = req.getParameter("user");
+//        Integer cartItemId = Integer.valueOf(req.getParameter("delete"));
+//
+//        ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
+//
+//        this.doGet(req, resp);
+//    }
 }
