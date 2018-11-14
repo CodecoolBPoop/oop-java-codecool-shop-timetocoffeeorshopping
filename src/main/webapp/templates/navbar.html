@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.thymeleaf.org ">
 
-<<!-- Navbar -->
+<!-- Navbar -->
 
 <nav th:fragment="navbar" class="navbar navbar-inverse navbar-expand-lg bg-dark" role="navigation-demo">
     <div class="container">
@@ -20,7 +20,7 @@
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" th:text="'Items in cart: ' + ${cartItems}">Items in cart:</a>
+                    <a id="navbarCartItemCounter" class="nav-link" th:text="'Items in cart: ' + ${cartItems}">Items in cart:</a>
                 </li>
                 <li class="nav-item">
                     <a href="#pablo" class="nav-link">

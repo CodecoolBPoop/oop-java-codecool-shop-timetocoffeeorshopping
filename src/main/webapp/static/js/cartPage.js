@@ -37,6 +37,7 @@ function ajaxPost(productId, action, data, msg) {
             if (action === "remove") {
                 document.getElementById("tr_" + productId).remove();
             }
+            updateNavBarCounter(this.response);
         }
         if (this.readyState == 4 && this.status !== 200) {
             showSmallNotification("Could not communicate with server! Status: " + this.status, "danger");
@@ -45,4 +46,10 @@ function ajaxPost(productId, action, data, msg) {
     xhttp.open("POST", "cart", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(data);
+}
+
+function updateNavBarCounter(response){
+    let num = response.split("value=\"")[1].split("\">")[0];
+    let counterElement = document.getElementById("navbarCartItemCounter");
+    counterElement.innerText = "Items in cart: " + num;
 }
