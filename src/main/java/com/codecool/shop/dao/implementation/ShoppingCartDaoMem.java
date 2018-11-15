@@ -52,10 +52,10 @@ public class ShoppingCartDaoMem implements ShoppingCartDao {
         newCart.setUser(user);
 
         // Adding items to cart for debugging purposes
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        for (Product p : productDataStore.getAll()) {
-            newCart.addProduct(p, 5);
-        }
+//        ProductDao productDataStore = ProductDaoMem.getInstance();
+//        for (Product p : productDataStore.getAll()) {
+//            newCart.addProduct(p, 5);
+//        }
 
         shoppingCarts.add(newCart);
         return newCart;

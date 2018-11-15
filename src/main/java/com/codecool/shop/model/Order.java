@@ -40,6 +40,7 @@ public class Order {
 
     public void isProcessed() {
         this.isActive = false;
+        shoppingCart.isProcessed();
     }
 
     public void setIsPayed(boolean itPayed) {
