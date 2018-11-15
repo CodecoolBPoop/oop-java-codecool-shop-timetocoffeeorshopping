@@ -54,12 +54,18 @@ public class PaymentPage extends HttpServlet {
         context.setVariable("userCart", userCart);
         context.setVariable("products", products);
         context.setVariable("productHashMap", productHashMap);
-        context.setVariable("page", "Checkout");
-        engine.process("checkout.html", context, resp.getWriter());
+        context.setVariable("page", "Payment");
+        engine.process("payment.html", context, resp.getWriter());
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        this.doGet(req, resp);
+//        this.doGet(req, resp);
+        String user = "sanya";
+        OrderDao orderDataStore = OrderDaoMem.getInstance();
+        Order userOrder = orderDataStore.getUserOrder(user);
+        userOrder.isProcessed();
+        userOrder.setIsPayed(true);
+        resp.sendRedirect("/");
     }
 }
