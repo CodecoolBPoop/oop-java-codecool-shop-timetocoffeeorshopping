@@ -50,6 +50,8 @@ public class PaymentPage extends HttpServlet {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
+        // Getting number of items in the cart for the navbar
+        context.setVariable("cartItems", userCart.getItemsNumber());
 
         context.setVariable("userCart", userCart);
         context.setVariable("products", products);
