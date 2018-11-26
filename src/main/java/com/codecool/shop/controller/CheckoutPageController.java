@@ -7,6 +7,7 @@ import com.codecool.shop.model.Customer;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ShoppingCart;
+import com.codecool.shop.utility.ShoppingCartContentHandler;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 import javax.servlet.ServletException;
@@ -27,20 +28,10 @@ public class CheckoutPageController extends HttpServlet {
         String user = "sanya";
 
         resp.setContentType("charset=UTF-8");
-        OrderDao orderDataStore = OrderDaoMem.getInstance();
-        Order userOrder = orderDataStore.getUserOrder(user);
-        userCart = userOrder.getShoppingCart();
-        userOrder.setShoppingCart(user);
-
+        userCart = ShoppingCartContentHandler.getShoppingCart(user);
         HashMap productHashMap = userCart.getProducts();
 
-        List<Product> products = new ArrayList<Product>();
-
-        Iterator it = productHashMap.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry entry = (Map.Entry)it.next();
-            products.add((Product) entry.getKey());
-        }
+        List<Product> products = ShoppingCartContentHandler.getProducts(productHashMap);
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
