@@ -1,8 +1,6 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
-import com.codecool.shop.dao.OrderDao;
-import com.codecool.shop.dao.implementation.OrderDaoMem;
 import com.codecool.shop.model.Customer;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Product;
@@ -20,10 +18,10 @@ import java.util.*;
 
 @WebServlet(urlPatterns = {"/checkout"})
 public class CheckoutPageController extends HttpServlet {
-    ShoppingCart userCart;
+    private ShoppingCart userCart;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         //TODO
         String user = "sanya";
 
@@ -46,7 +44,7 @@ public class CheckoutPageController extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Customer customer = new Customer();
         customer.setFirstName(req.getParameter("firstname"));
         customer.setLastName(req.getParameter("lastname"));

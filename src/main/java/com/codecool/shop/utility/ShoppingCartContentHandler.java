@@ -10,11 +10,10 @@ import java.util.*;
 
 public class ShoppingCartContentHandler {
     public static List<Product> getProducts(HashMap productHashMap) {
-        List<Product> products = new ArrayList<Product>();
+        List<Product> products = new ArrayList<>();
 
-        Iterator it = productHashMap.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry entry = (Map.Entry)it.next();
+        for (Object o : productHashMap.entrySet()) {
+            Map.Entry entry = (Map.Entry) o;
             products.add((Product) entry.getKey());
         }
         return products;
