@@ -14,6 +14,12 @@ public class Order {
     private Customer customer;
     private String user;
 
+    /*
+    Until DaoMEM exist
+     */
+
+    public Order() {
+    }
 
     public Order(Customer customer, ShoppingCart shoppingCart) {
         this.customer = customer;
