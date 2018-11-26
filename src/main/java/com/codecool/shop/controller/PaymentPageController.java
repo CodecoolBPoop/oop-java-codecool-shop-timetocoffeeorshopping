@@ -9,6 +9,7 @@ import com.codecool.shop.model.Customer;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ShoppingCart;
+import com.codecool.shop.utility.ShoppingCartContentHandler;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -21,31 +22,15 @@ import java.io.IOException;
 import java.util.*;
 
 @WebServlet(urlPatterns = {"/payment"})
-public class PaymentPage extends HttpServlet {
+public class PaymentPageController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String user = "sanya";
 
         resp.setContentType("charset=UTF-8");
-//
-//        ProductDao productDataStore = ProductDaoMem.getInstance();
-//        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
-        OrderDao orderDataStore = OrderDaoMem.getInstance();
-        Order userOrder = orderDataStore.getUserOrder(user);
-        userOrder.setShoppingCart(user);
-        ShoppingCart userCart = userOrder.getShoppingCart();
+        ShoppingCart userCart = ShoppingCartContentHandler.getShoppingCart(user);
 
-        HashMap productHashMap = userCart.getProducts();
-
-        List<Product> products = new ArrayList<Product>();
-
-        Iterator it = productHashMap.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry entry = (Map.Entry) it.next();
-            products.add((Product) entry.getKey());
-        }
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
@@ -53,9 +38,7 @@ public class PaymentPage extends HttpServlet {
         // Getting number of items in the cart for the navbar
         context.setVariable("cartItems", userCart.getItemsNumber());
 
-        context.setVariable("userCart", userCart);
-        context.setVariable("products", products);
-        context.setVariable("productHashMap", productHashMap);
+        context.setVariable("totalPrice", userCart.getTotalPrice());
         context.setVariable("page", "Payment");
         engine.process("payment.html", context, resp.getWriter());
     }

@@ -7,7 +7,6 @@ import com.codecool.shop.model.Customer;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ShoppingCart;
-import com.sun.xml.internal.bind.v2.TODO;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 import javax.servlet.ServletException;
@@ -19,7 +18,7 @@ import java.io.IOException;
 import java.util.*;
 
 @WebServlet(urlPatterns = {"/checkout"})
-public class CheckoutPage extends HttpServlet {
+public class CheckoutPageController extends HttpServlet {
     ShoppingCart userCart;
 
     @Override

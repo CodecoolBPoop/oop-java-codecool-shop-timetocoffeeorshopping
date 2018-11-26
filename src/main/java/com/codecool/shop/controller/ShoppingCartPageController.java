@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.util.*;
 
 @WebServlet(urlPatterns = {"/cart"})
-public class ShoppingCartPage extends HttpServlet {
+public class ShoppingCartPageController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
