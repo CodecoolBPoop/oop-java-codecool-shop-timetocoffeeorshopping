@@ -6,15 +6,19 @@ import java.util.List;
 
 public class Order {
 
-    private static int id = 0;
+//    private static int id = 0;
+
     private boolean isActive;
     private boolean isPayed;
     private ShoppingCart shoppingCart;
+    private Customer customer;
     private String user;
 
 
-    public Order() {
-        id += 1;
+    public Order(Customer customer, ShoppingCart shoppingCart) {
+        this.customer = customer;
+        this.shoppingCart = shoppingCart;
+//        id += 1;
     }
 
     public ShoppingCart setShoppingCart(String user) {
