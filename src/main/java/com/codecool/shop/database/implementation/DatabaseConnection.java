@@ -64,8 +64,7 @@ public class DatabaseConnection implements DatabaseHandler {
             Statement stmt = conn.createStatement(
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
-            String sql = queryString;
-            ResultSet rs = stmt.executeQuery(sql);
+            ResultSet rs = stmt.executeQuery(queryString);
 
             return rs;
 
