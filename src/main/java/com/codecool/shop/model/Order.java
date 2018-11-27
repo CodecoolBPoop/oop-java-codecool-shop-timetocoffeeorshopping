@@ -14,10 +14,6 @@ public class Order {
     private Customer customer;
     private String user;
 
-    /*
-    Until DaoMEM exist
-     */
-
     public Order() {
     }
 
