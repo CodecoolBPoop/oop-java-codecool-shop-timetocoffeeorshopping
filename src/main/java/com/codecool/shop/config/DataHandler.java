@@ -9,7 +9,9 @@ import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.database.DatabaseHandler;
+import com.codecool.shop.database.DatabaseQuery;
 import com.codecool.shop.database.implementation.DatabaseConnection;
+import com.codecool.shop.database.implementation.ExecuteQuery;
 import com.codecool.shop.model.ShoppingCart;
 
 public class DataHandler {
@@ -22,5 +24,6 @@ public class DataHandler {
     public static ShoppingCart userCart(String user){
         return shoppingCartDataStore.getUserCart(user);
     }
+    public static DatabaseQuery dbQuery = ExecuteQuery.getInstance();
 
 }
