@@ -2,6 +2,8 @@ package com.codecool.shop.database;
 
 import com.codecool.shop.model.User;
 
+import java.sql.ResultSet;
+
 public interface DatabaseHandler {
-    User getUserObject(String userName);
+    ResultSet getResultSetForQuery(String queryString);
 }
