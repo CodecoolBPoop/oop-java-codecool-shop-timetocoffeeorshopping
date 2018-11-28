@@ -38,7 +38,7 @@ public class RegistrationPageController extends HttpServlet {
         customer.setPassword(req.getParameter("password"));
         ExecuteQuery executeQuery = new ExecuteQuery();
         executeQuery.registerNewUser(customer);
-      
+
         resp.sendRedirect("/");
     }
 }
