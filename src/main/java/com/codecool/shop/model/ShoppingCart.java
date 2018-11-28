@@ -1,5 +1,7 @@
 package com.codecool.shop.model;
 
+import com.codecool.shop.config.DataHandler;
+
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
@@ -7,22 +9,35 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class ShoppingCart {
-    private String user;
+    public int getId() {
+        return id;
+    }
+
+    private int id;
+    private User user;
     private LocalDateTime orderPlacedDate;
-    private HashMap products = new HashMap();
-    private Boolean isActive = true;
+    private HashMap products;
+    private Boolean isActive;
+
+    public ShoppingCart (int id, User user, LocalDateTime orderPlacedDate, HashMap products, Boolean isActive){
+        this.id = id;
+        this.user = user;
+        this.orderPlacedDate = orderPlacedDate;
+        this.products = products;
+        this.isActive = isActive;
+    }
 
     public LocalDateTime getOrderPlacedDate() {
         return orderPlacedDate;
     }
 
-    public String getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(String user) {
-        this.user = user;
-    }
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 
     public Boolean getIsActive() {
         return isActive;
@@ -38,12 +53,7 @@ public class ShoppingCart {
     }
 
     public void addProduct(Product product, int num) {
-        if (!products.isEmpty() && products.containsKey(product)) {
-            int numOfProducts = (int) products.get(product);
-            products.put(product, num + numOfProducts);
-        } else {
-            products.put(product, num);
-        }
+        DataHandler.dbQuery.addProductToCart(this, product, num);
     }
 
     public void removeProduct(Product product) {

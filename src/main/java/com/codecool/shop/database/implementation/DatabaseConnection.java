@@ -1,7 +1,6 @@
 package com.codecool.shop.database.implementation;
 
 import com.codecool.shop.database.DatabaseHandler;
-import com.codecool.shop.model.User;
 
 import java.sql.*;
 
@@ -74,6 +73,4 @@ public class DatabaseConnection implements DatabaseHandler {
         }
         return null;
     }
-
-
 }

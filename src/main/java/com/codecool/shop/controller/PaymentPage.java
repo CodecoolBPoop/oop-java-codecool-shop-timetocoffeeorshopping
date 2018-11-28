@@ -4,7 +4,6 @@ import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.dao.implementation.OrderDaoMem;
-import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
 import com.codecool.shop.model.Customer;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Product;
@@ -31,10 +30,10 @@ public class PaymentPage extends HttpServlet {
 //
 //        ProductDao productDataStore = ProductDaoMem.getInstance();
 //        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
+//        ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
         OrderDao orderDataStore = OrderDaoMem.getInstance();
         Order userOrder = orderDataStore.getUserOrder(user);
-        userOrder.setShoppingCart(user);
+//        userOrder.setShoppingCart(user);
         ShoppingCart userCart = userOrder.getShoppingCart();
 
         HashMap productHashMap = userCart.getProducts();

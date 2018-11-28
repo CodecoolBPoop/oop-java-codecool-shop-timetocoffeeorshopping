@@ -4,17 +4,26 @@ import java.util.Currency;
 
 public class Product extends BaseModel {
 
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    private int id;
     private float defaultPrice;
-    private Currency defaultCurrency;
+    private String defaultCurrency;
     private ProductCategory productCategory;
     private Supplier supplier;
 
-
-    public Product(String name, float defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier) {
+    public Product(int id, String name, float defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier) {
         super(name, description);
-        this.setPrice(defaultPrice, currencyString);
-        this.setSupplier(supplier);
-        this.setProductCategory(productCategory);
+        this.name = name;
+        this.description = description;
+        this.id = id;
+        this.defaultPrice = defaultPrice;
+        this.supplier = supplier;
+        this.productCategory = productCategory;
+        this.defaultCurrency = currencyString;
     }
 
     public float getDefaultPrice() {
@@ -25,11 +34,11 @@ public class Product extends BaseModel {
         this.defaultPrice = defaultPrice;
     }
 
-    public Currency getDefaultCurrency() {
+    public String getDefaultCurrency() {
         return defaultCurrency;
     }
 
-    public void setDefaultCurrency(Currency defaultCurrency) {
+    public void setDefaultCurrency(String defaultCurrency) {
         this.defaultCurrency = defaultCurrency;
     }
 
@@ -40,10 +49,10 @@ public class Product extends BaseModel {
         return this.defaultPrice;
     }
 
-    public void setPrice(float price, String currency) {
-        this.defaultPrice = price;
-        this.defaultCurrency = Currency.getInstance(currency);
-    }
+//    public void setPrice(float price, String currency) {
+//        this.defaultPrice = price;
+//        this.defaultCurrency = Currency.getInstance(currency);
+//    }
 
     public ProductCategory getProductCategory() {
         return productCategory;
