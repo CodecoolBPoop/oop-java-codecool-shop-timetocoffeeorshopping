@@ -2,6 +2,8 @@ package com.codecool.shop.database.implementation;
 
 import com.codecool.shop.config.DataHandler;
 import com.codecool.shop.database.DatabaseQuery;
+import com.codecool.shop.model.Product;
+import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.User;
 
 import java.sql.ResultSet;
@@ -74,6 +76,22 @@ public class ExecuteQuery implements DatabaseQuery {
         System.out.println("user EMAIL:   " + user.getEmail());
         System.out.println("user PW:      " + user.getPassword());
         System.out.println("user Session: " + user.getSession());
+    }
+
+    public ProductCategory getCategory(int id) {
+        ProductCategory category;
+        try {
+            String sql = "SELECT * FROM product_category WHERE id = " + id + ";";
+            ResultSet rs = DataHandler.dbHandler.getResultSetForQuery(sql);
+            rs.next();
+            category = new ProductCategory(id, rs.getString("name"), rs.getString("department"), rs.getString("description"));
+            //Clean-up environment
+            closeResultset(rs);
+            return category;
+        } catch (Exception e) {
+            System.out.println("Exception: " + e);
+        }
+        return null;
     }
 
     private void closeResultset(ResultSet rs) throws SQLException{
