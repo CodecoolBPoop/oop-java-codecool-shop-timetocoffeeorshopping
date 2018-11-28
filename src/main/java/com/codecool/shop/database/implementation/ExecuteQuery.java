@@ -15,7 +15,7 @@ public class ExecuteQuery implements DatabaseQuery {
 
     private static final ExecuteQuery INSTANCE = new ExecuteQuery();
 
-    public ExecuteQuery() {
+    private ExecuteQuery() {
     }
 
 
@@ -58,7 +58,7 @@ public class ExecuteQuery implements DatabaseQuery {
         return null;
     }
 
-    public void registerNewUser(Customer customer) {
+    public static void registerNewUser(Customer customer) {
 
         try {
             String query =
