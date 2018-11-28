@@ -8,6 +8,8 @@ import com.codecool.shop.model.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ExecuteQuery implements DatabaseQuery {
 
@@ -42,7 +44,7 @@ public class ExecuteQuery implements DatabaseQuery {
     public User getUserObjectBySession(String sessionId) {
         User user;
         try {
-            String sql = "SELECT * FROM auth_user WHERE session_id = '" + sessionId +"';";
+            String sql = "SELECT * FROM auth_user WHERE session_id = '" + sessionId + "';";
             ResultSet rs = DataHandler.dbHandler.getResultSetForQuery(sql);
 
             user = getUserObjectFromResultSet(rs);
@@ -56,7 +58,7 @@ public class ExecuteQuery implements DatabaseQuery {
         return null;
     }
 
-    private User getUserObjectFromResultSet (ResultSet rs) throws SQLException {
+    private User getUserObjectFromResultSet(ResultSet rs) throws SQLException {
         rs.next();
 
         int userId = rs.getInt("id");
@@ -70,7 +72,7 @@ public class ExecuteQuery implements DatabaseQuery {
         return user;
     }
 
-    private void printUserDetails(User user){
+    private void printUserDetails(User user) {
         System.out.println("user ID:      " + user.getId());
         System.out.println("user NAME:    " + user.getName());
         System.out.println("user EMAIL:   " + user.getEmail());
@@ -94,7 +96,29 @@ public class ExecuteQuery implements DatabaseQuery {
         return null;
     }
 
-    private void closeResultset(ResultSet rs) throws SQLException{
+    public ArrayList<ProductCategory> getCategories() {
+        ProductCategory category;
+        ArrayList<ProductCategory> categoryList = new ArrayList<ProductCategory>();
+
+        try {
+            String sql = "SELECT * FROM product_category;";
+            ResultSet rs = DataHandler.dbHandler.getResultSetForQuery(sql);
+
+            while (rs.next()) {
+                category = new ProductCategory(rs.getInt("id"), rs.getString("name"), rs.getString("department"), rs.getString("description"));
+                categoryList.add(category);
+            }
+
+            //Clean-up environment
+            closeResultset(rs);
+            return categoryList;
+        } catch (Exception e) {
+            System.out.println("Exception: " + e);
+        }
+        return null;
+    }
+
+    private void closeResultset(ResultSet rs) throws SQLException {
         rs.getStatement().close();
         rs.close();
     }
