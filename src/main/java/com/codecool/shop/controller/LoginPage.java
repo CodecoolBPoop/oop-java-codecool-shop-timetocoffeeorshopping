@@ -1,6 +1,6 @@
 package com.codecool.shop.controller;
 
-import com.codecool.shop.authentication.LogInAuthent;
+import com.codecool.shop.password.HashAndAuthenticate;
 import com.codecool.shop.config.TemplateEngineUtil;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -29,7 +29,7 @@ public class LoginPage extends HttpServlet {
         String password = request.getParameter("password");
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
         WebContext context = new WebContext(request, response, request.getServletContext());
-        boolean isVerified = LogInAuthent.verifyPassword(name, password);
+        boolean isVerified = HashAndAuthenticate.verifyPassword(name, password);
         context.setVariable("isVerified", isVerified);
 
         if (isVerified) {
