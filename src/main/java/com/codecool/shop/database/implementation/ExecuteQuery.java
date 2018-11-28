@@ -78,7 +78,7 @@ public class ExecuteQuery implements DatabaseQuery {
         return null;
     }
 
-    public void registerNewUser(Customer customer) {
+    public static void registerNewUser(Customer customer) {
 
         try {
             String query =
