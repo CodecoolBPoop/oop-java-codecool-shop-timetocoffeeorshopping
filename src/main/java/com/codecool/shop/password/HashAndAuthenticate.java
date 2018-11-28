@@ -5,18 +5,19 @@ import com.google.common.hash.Hashing;
 import java.nio.charset.StandardCharsets;
 import com.codecool.shop.database.implementation.ExecuteQuery;
 import com.codecool.shop.model.User;
-
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.security.MessageDigest;
 
 public class HashAndAuthenticate {
 
-    public static boolean verifyPassword(String email, String password) {
+    private HashAndAuthenticate() {
+    }
+
+    public static boolean verifyPassword(String email, String passwordForVerification) throws NoSuchAlgorithmException {
         ExecuteQuery executeQuery = ExecuteQuery.getInstance();
         User user = executeQuery.getUserObjectByEmail(email);
         String storagedPassword = user.getPassword();
-        if (storagedPassword.equals(password)) {
+        passwordForVerification = getSecurePassword(passwordForVerification);
+        if (storagedPassword.equals(passwordForVerification)) {
             return true;
         }
         return false;
@@ -38,34 +39,5 @@ public class HashAndAuthenticate {
                 .hashString(plainPassword, StandardCharsets.UTF_8)
                 .toString();
         return sha256hex;
-
-
-        //String sha256hex = org.apache.commons.codec.digest.DigestUtils.sha256Hex(plainPassword);
-//        String generatedPassword = null;
-//
-//        try {
-//            MessageDigest md = MessageDigest.getInstance("SHA-256");
-//            md.update(salt);
-//            byte[] bytes = md.digest(plainPassword.getBytes());
-//            StringBuilder sb = new StringBuilder();
-//            for(int i=0; i< bytes.length ;i++)
-//            {
-//                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-//            }
-//            generatedPassword = sb.toString();
-//        }
-//        catch (NoSuchAlgorithmException e)
-//        {
-//            e.printStackTrace();
-//        }
-//        return generatedPassword;
     }
-
-    //Add salt
-//    private static byte[] getSalt() throws NoSuchAlgorithmException {
-//        SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
-//        byte[] salt = new byte[16];
-//        sr.nextBytes(salt);
-//        return salt;
-//    }
 }

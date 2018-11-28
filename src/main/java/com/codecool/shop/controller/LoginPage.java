@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 
 @WebServlet(urlPatterns = {"/login"})
 public class LoginPage extends HttpServlet {
@@ -26,12 +27,19 @@ public class LoginPage extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String testEmail = "sz.indira@freemail.hu";
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
         WebContext context = new WebContext(request, response, request.getServletContext());
-        boolean isVerified = HashAndAuthenticate.verifyPassword(testEmail, password);
+        boolean isVerified = false;
+
+        try {
+            isVerified = HashAndAuthenticate.verifyPassword(email, password);
+            System.out.println("isVerified = " + isVerified);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
         context.setVariable("isVerified", isVerified);
         context.setVariable("page", "Login");
 

@@ -63,15 +63,19 @@ public class ExecuteQuery implements DatabaseQuery {
     public User getUserObjectByEmail(String email) {
         User user;
         try {
+            String query = "SELECT * FROM auth_user WHERE email = ?";
 
-            String sql = "SELECT * FROM auth_user WHERE email = '" + email + "';";
-            ResultSet rs = DataHandler.dbHandler.getResultSetForQuery(sql);
+            try (PreparedStatement statement = DatabaseConnection.conn.prepareStatement(query)) {
+                statement.setString(1, email);
+                ResultSet rs = statement.executeQuery();
+                user = getUserObjectFromResultSet(rs);
 
-            user = getUserObjectFromResultSet(rs);
-
-            //Clean-up environment
-            closeResultset(rs);
-            return user;
+                //Clean-up environment
+                closeResultset(rs);
+                return user;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         } catch (Exception e) {
             System.out.println("Exception: " + e);
         }
