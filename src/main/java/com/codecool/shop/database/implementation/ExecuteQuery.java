@@ -4,10 +4,14 @@ import com.codecool.shop.config.DataHandler;
 import com.codecool.shop.database.DatabaseQuery;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
+import com.codecool.shop.model.Customer;
 import com.codecool.shop.model.User;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import static javax.swing.DropMode.INSERT;
 
 public class ExecuteQuery implements DatabaseQuery {
 
@@ -74,6 +78,27 @@ public class ExecuteQuery implements DatabaseQuery {
         return null;
     }
 
+    public void registerNewUser(Customer customer) {
+
+        try {
+            String query =
+                    "INSERT INTO auth_user(name, email, password) VALUES (?,?,?)";
+            try (PreparedStatement statement = DatabaseConnection.conn.prepareStatement(query)) {
+
+                statement.setString(1, customer.getFirstName() + customer.getLastName());
+                statement.setString(2, customer.getEmail());
+                statement.setString(3, customer.getPassword());
+                System.out.println(statement);
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+
+           }
+
     private User getUserObjectFromResultSet (ResultSet rs) throws SQLException {
         rs.next();
 
@@ -110,6 +135,7 @@ public class ExecuteQuery implements DatabaseQuery {
             System.out.println("Exception: " + e);
         }
         return null;
+        System.out.println("user Session: " + user.getSessionId());
     }
 
     private void closeResultset(ResultSet rs) throws SQLException{
