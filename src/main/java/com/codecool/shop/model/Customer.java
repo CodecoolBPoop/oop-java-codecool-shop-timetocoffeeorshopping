@@ -23,7 +23,7 @@ public class Customer {
         return id;
     }
 
-    public String getFirstName(String firstname) {
+    public String getFirstName() {
         return firstName;
     }
 
@@ -33,6 +33,10 @@ public class Customer {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public int getPhone() {
@@ -57,6 +61,10 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setPhone(int phone) {
