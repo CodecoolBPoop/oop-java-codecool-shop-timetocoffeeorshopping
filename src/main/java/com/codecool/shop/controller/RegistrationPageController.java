@@ -1,6 +1,7 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.database.implementation.ExecuteQuery;
 import com.codecool.shop.model.Customer;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -35,10 +36,9 @@ public class RegistrationPageController extends HttpServlet {
         customer.setLastName(req.getParameter("lastname"));
         customer.setEmail(req.getParameter("email"));
         customer.setPassword(req.getParameter("password"));
-
-        System.out.println("customer = " + customer.getEmail());
-
-
+        ExecuteQuery executeQuery = new ExecuteQuery();
+        executeQuery.registerNewUser(customer);
+      
         resp.sendRedirect("/");
     }
 }
