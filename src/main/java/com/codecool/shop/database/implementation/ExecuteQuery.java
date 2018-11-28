@@ -63,13 +63,14 @@ public class ExecuteQuery implements DatabaseQuery {
         try {
             String query =
                     "INSERT INTO auth_user(name, email, password) VALUES (?,?,?)";
-            PreparedStatement statement = DatabaseConnection.conn.prepareStatement(query);
+            try (PreparedStatement statement = DatabaseConnection.conn.prepareStatement(query)) {
 
-            statement.setString(1, customer.getFirstName() + customer.getLastName());
-            statement.setString(2, customer.getEmail());
-            statement.setString(3, customer.getPassword());
-            System.out.println(statement);
-            statement.executeUpdate();
+                statement.setString(1, customer.getFirstName() + customer.getLastName());
+                statement.setString(2, customer.getEmail());
+                statement.setString(3, customer.getPassword());
+                System.out.println(statement);
+                statement.executeUpdate();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -97,7 +98,7 @@ public class ExecuteQuery implements DatabaseQuery {
         System.out.println("user NAME:    " + user.getName());
         System.out.println("user EMAIL:   " + user.getEmail());
         System.out.println("user PW:      " + user.getPassword());
-        System.out.println("user Session: " + user.getSession());
+        System.out.println("user Session: " + user.getSessionId());
     }
 
     private void closeResultset(ResultSet rs) throws SQLException{
