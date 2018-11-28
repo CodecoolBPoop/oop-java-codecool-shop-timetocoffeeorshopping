@@ -56,6 +56,24 @@ public class ExecuteQuery implements DatabaseQuery {
         return null;
     }
 
+    public User getUserObjectByEmail(String email) {
+        User user;
+        try {
+
+            String sql = "SELECT * FROM auth_user WHERE email = '" + email + "';";
+            ResultSet rs = DataHandler.dbHandler.getResultSetForQuery(sql);
+
+            user = getUserObjectFromResultSet(rs);
+
+            //Clean-up environment
+            closeResultset(rs);
+            return user;
+        } catch (Exception e) {
+            System.out.println("Exception: " + e);
+        }
+        return null;
+    }
+
     private User getUserObjectFromResultSet (ResultSet rs) throws SQLException {
         rs.next();
 
@@ -75,7 +93,7 @@ public class ExecuteQuery implements DatabaseQuery {
         System.out.println("user NAME:    " + user.getName());
         System.out.println("user EMAIL:   " + user.getEmail());
         System.out.println("user PW:      " + user.getPassword());
-        System.out.println("user Session: " + user.getSession());
+        System.out.println("user Session: " + user.getSessionId());
     }
 
     public ProductCategory getCategory(int id) {

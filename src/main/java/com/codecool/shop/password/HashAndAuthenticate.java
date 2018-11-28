@@ -1,13 +1,22 @@
 package com.codecool.shop.password;
 
+import com.codecool.shop.database.implementation.ExecuteQuery;
+import com.codecool.shop.model.User;
+
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.MessageDigest;
 
 public class HashAndAuthenticate {
 
-    public static boolean verifyPassword(String name, String password) {
-        return true;
+    public static boolean verifyPassword(String email, String password) {
+        ExecuteQuery executeQuery = ExecuteQuery.getInstance();
+        User user = executeQuery.getUserObjectByEmail(email);
+        String storagedPassword = user.getPassword();
+        if (storagedPassword.equals(password)) {
+            return true;
+        }
+        return false;
     }
 
     /*

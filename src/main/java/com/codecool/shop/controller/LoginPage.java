@@ -26,16 +26,20 @@ public class LoginPage extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String name = request.getParameter("name");
+        String testEmail = "sz.indira@freemail.hu";
+        String email = request.getParameter("email");
         String password = request.getParameter("password");
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
         WebContext context = new WebContext(request, response, request.getServletContext());
-        boolean isVerified = HashAndAuthenticate.verifyPassword(name, password);
+        boolean isVerified = HashAndAuthenticate.verifyPassword(testEmail, password);
         context.setVariable("isVerified", isVerified);
+        context.setVariable("page", "Login");
+
 
         if (isVerified) {
             HttpSession session = request.getSession();
-            session.setAttribute("name",name);
+            String sessionID = session.getId();
+//            adatbázisba kiírni
             engine.process("login.html", context, response.getWriter());
 
         } else {
