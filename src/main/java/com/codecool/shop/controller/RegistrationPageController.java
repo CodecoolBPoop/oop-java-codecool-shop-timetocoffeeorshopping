@@ -42,8 +42,8 @@ public class RegistrationPageController extends HttpServlet {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        //ExecuteQuery executeQuery = new ExecuteQuery();
-        ExecuteQuery.registerNewUser(customer);
+        ExecuteQuery executeQuery = ExecuteQuery.getInstance();
+        executeQuery.registerNewUser(customer);
 
         resp.sendRedirect("/");
     }

@@ -78,7 +78,7 @@ public class ExecuteQuery implements DatabaseQuery {
         return null;
     }
 
-    public static void registerNewUser(Customer customer) {
+    public void registerNewUser(Customer customer) {
 
         try {
             String query =
@@ -135,7 +135,6 @@ public class ExecuteQuery implements DatabaseQuery {
             System.out.println("Exception: " + e);
         }
         return null;
-        System.out.println("user Session: " + user.getSessionId());
     }
 
     private void closeResultset(ResultSet rs) throws SQLException{
