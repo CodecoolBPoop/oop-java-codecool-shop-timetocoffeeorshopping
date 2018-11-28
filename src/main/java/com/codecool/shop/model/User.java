@@ -5,14 +5,14 @@ public class User {
     private String name;
     private String password;
     private String email;
-    private String session;
+    private String sessionId;
 
-    public User(int id, String name, String email, String password, String session) {
+    public User(int id, String name, String email, String password, String sessionId) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.session = session;
+        this.sessionId = sessionId;
     }
 
     public String getName() {
@@ -39,12 +39,12 @@ public class User {
         this.password = password;
     }
 
-    public String getSession() {
-        return session;
+    public String getSessionId() {
+        return sessionId;
     }
 
-    public void setSession(String session) {
-        this.session = session;
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
     }
 
     public int getId() {

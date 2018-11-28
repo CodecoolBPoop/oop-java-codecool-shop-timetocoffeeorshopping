@@ -16,7 +16,7 @@ public class DatabaseConnection implements DatabaseHandler {
     static final String USER = "testuser";
     static final String PASS = "ASdf2954";
 
-    private static Connection conn = connect();
+    static Connection conn = connect();
 
     private static final DatabaseConnection INSTANCE = new DatabaseConnection();
 
