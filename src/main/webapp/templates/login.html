@@ -1,181 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="perfect-scrollbar-off" lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--Header-->
+<div th:replace="Header.html :: header"></div>
 
-<head>
-    {% load static %}
-  <meta charset="utf-8" />
-  <link rel="apple-touch-icon" sizes="76x76" href="{% static 'assets/img/apple-icon.png' %}">
-  <link rel="icon" type="image/png" href="{% static '/img/favicon.png' %}">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>
-    Inventory management
-  </title>
-  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-  <!--     Fonts and icons     -->
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-  <!-- CSS Files -->
-  <link href="{% static '/css/material-kit.css' %}" rel="stylesheet"/>
-  <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="{% static '/css/demo.css' %}" rel="stylesheet"/>
+<body class="">
 
-    <!--   Core JS Files   -->
-  <script src="{% static '/js/core/jquery.min.js' %}" type="text/javascript" defer></script>
-  <script src="{% static '/js/core/popper.min.js' %}" type="text/javascript" defer></script>
-  <script src="{% static '/js/core/bootstrap-material-design.min.js' %}" type="text/javascript" defer></script>
-  <script src="{% static '/js/plugins/moment.min.js' %}" defer></script>
-  <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
-  <script src="{% static '/js/plugins/bootstrap-datetimepicker.js' %}" type="text/javascript" defer></script>
-  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-  <script src="{% static '/js/plugins/nouislider.min.js' %}" type="text/javascript" defer></script>
-  <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
-  <script src="{% static '/js/material-kit.js?v=2.0.3' %}" type="text/javascript" defer></script>
-</head>
+<!--Sidebar-->
+<div th:replace="Sidebar.html :: sidebar"></div>
 
-<body class="signup-page sidebar-collapse">
-  <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
-    <div class="container">
-      <div class="navbar-translate">
-          <h4>Inventory management</h4>
-{#        <a class="navbar-brand" href="https://demos.creative-tim.com/material-kit/index.html">#}
-{#          Material Kit </a>#}
-        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-          <span class="navbar-toggler-icon"></span>
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      </div>
-{#      <div class="collapse navbar-collapse">#}
-{#        <ul class="navbar-nav ml-auto">#}
-{#          <li class="dropdown nav-item">#}
-{#            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">#}
-{#              <i class="material-icons">apps</i> Components#}
-{#            </a>#}
-{#            <div class="dropdown-menu dropdown-with-icons">#}
-{#              <a href="{% static '/index.html" class="dropdown-item' %}">#}
-{#                <i class="material-icons">layers</i> All Components#}
-{#              </a>#}
-{#              <a href="https://demos.creative-tim.com/material-kit/docs/2.0/getting-started/introduction.html" class="dropdown-item">#}
-{#                <i class="material-icons">content_paste</i> Documentation#}
-{#              </a>#}
-{#            </div>#}
-{#          </li>#}
-{#          <li class="nav-item">#}
-{#            <a class="nav-link" href="javascript:void(0)" onclick="scrollToDownload()">#}
-{#              <i class="material-icons">cloud_download</i> Download#}
-{#            </a>#}
-{#          </li>#}
-{#          <li class="nav-item">#}
-{#            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://twitter.com/CreativeTim" target="_blank" data-original-title="Follow us on Twitter">#}
-{#              <i class="fa fa-twitter"></i>#}
-{#            </a>#}
-{#          </li>#}
-{#          <li class="nav-item">#}
-{#            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.facebook.com/CreativeTim" target="_blank" data-original-title="Like us on Facebook">#}
-{#              <i class="fa fa-facebook-square"></i>#}
-{#            </a>#}
-{#          </li>#}
-{#          <li class="nav-item">#}
-{#            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.instagram.com/CreativeTimOfficial" target="_blank" data-original-title="Follow us on Instagram">#}
-{#              <i class="fa fa-instagram"></i>#}
-{#            </a>#}
-{#          </li>#}
-{#        </ul>#}
-{#      </div>#}
-    </div>
-  </nav>
-  <div class="page-header header-filter" filter-color="purple" style="background-image: url('{% static '/img/profile_city.jpg' %}')">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-3 ml-auto mr-auto">
-          <div class="card card-signup">
-{#            <h2 class="card-title text-center">Belépés</h2>#}
-            <div class="card-body">
-{#                  <div class="social text-center">#}
-{#                    <button class="btn btn-just-icon btn-round btn-twitter">#}
-{#                      <i class="fa fa-twitter"></i>#}
-{#                    </button>#}
-{#                    <button class="btn btn-just-icon btn-round btn-dribbble">#}
-{#                      <i class="fa fa-dribbble"></i>#}
-{#                    </button>#}
-{#                    <button class="btn btn-just-icon btn-round btn-facebook">#}
-{#                      <i class="fa fa-facebook"> </i>#}
-{#                    </button>#}
-{#                    <h4> or be classical </h4>#}
-{#                  </div>#}
-                  <form class="form" method="post" action="{% url 'login' %}">{% csrf_token %}
-                    <div class="form-group">
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">
-                            <i class="material-icons">person</i>
-                          </span>
-                        </div>
-                        <input id="id_username" name="username" type="text" class="form-control" placeholder="Felhasználónév...">
-                      </div>
-                    </div>
-{#                    <div class="form-group">#}
-{#                      <div class="input-group">#}
-{#                        <div class="input-group-prepend">#}
-{#                          <span class="input-group-text">#}
-{#                            <i class="material-icons">mail</i>#}
-{#                          </span>#}
-{#                        </div>#}
-{#                        <input type="text" class="form-control" placeholder="Email...">#}
-{#                      </div>#}
-{#                    </div>#}
-                    <div class="form-group">
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">
-                            <i class="material-icons">lock_outline</i>
-                          </span>
-                        </div>
-                        <input id="id_password" name="password" type="password" placeholder="Jelszó..." class="form-control" />
-                      </div>
-                    </div>
-{#                    <div class="form-check">#}
-{#                      <label class="form-check-label">#}
-{#                        <input class="form-check-input" type="checkbox" value="" checked>#}
-{#                        <span class="form-check-sign">#}
-{#                          <span class="check"></span>#}
-{#                        </span>#}
-{#                        Elfogadom a#}
-{#                        <a href="#something">felhasználási feltételeket</a>.#}
-{#                      </label>#}
-{#                    </div>#}
-                    <div class="text-center">
-                        <input type="submit" value="Belépés" class="btn btn-primary btn-round">
-                    </div>
-                  <input type="hidden" name="next" value="{{ next }}"/>
+<div class="main-panel">
+    <!--Navbar-->
+    <div th:replace="navbar.html :: navbar"></div>
 
-                        {% if form.errors %}
-                            <div class="input-group form-group-no-border input-lg">
-                                <p>A felhasználónév és jelszó nem egyezik. Kérlek próbáld meg újra!</p>
+    <div class="content">
+        <div class="container-fluid">
+
+            <div class="col-md-12">
+                <div id="form">
+                    <form method="post" action="/login" >
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control" name="username" placeholder="Username" required>
                             </div>
-                        {% endif %}
-
-                        {% if next %}
-                            {% if user.is_authenticated %}
-                                <div class="input-group form-group-no-border input-lg">
-                                    <p>Your account doesn't have access to this page. To proceed,
-                                        please login with an account that has access.</p>
-                                </div>
-                            {% else %}
-                                <div class="input-group form-group-no-border input-lg">
-                                    <p>Please login to see this page.</p>
-                                </div>
-                            {% endif %}
-                        {% endif %}
-                  </form>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <input type="password" class="form-control" name="password" placeholder="Password" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input id='checkbox' class="form-check-input" type="checkbox" value="" required>
+                                    Accept terms and conditions.
+                                    <span class="form-check-sign">
+                                    <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <button id="submit" type="submit" class="btn btn-primary" style="display: none">Sign in</button>
+                    </form>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-    {% include 'footer.html' %}
-  </div>
 
+
+    <!--Footer-->
+    <div th:replace="footer_new.html :: footer"></div>
+</div>
+<script src="/static/js/registration.js" type="text/javascript" defer></script>
 </body>
-
 </html>

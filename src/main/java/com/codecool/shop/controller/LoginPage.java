@@ -18,6 +18,7 @@ public class LoginPage extends HttpServlet {
         response.setContentType("charset=UTF-8");
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
         WebContext context = new WebContext(request, response, request.getServletContext());
+        context.setVariable("page", "Login");
         engine.process("login.html", context, response.getWriter());
     }
 }
