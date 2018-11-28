@@ -20,7 +20,7 @@
                     <form method="post" action="/login" >
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <input type="text" class="form-control" name="username" placeholder="Username" required>
+                                <input type="email" class="form-control" name="email" placeholder="E-mail" required>
                             </div>
                         </div>
                         <div class="form-row">
@@ -39,7 +39,7 @@
                                 </label>
                             </div>
                         </div>
-                        <button id="submit" type="submit" class="btn btn-primary" style="display: none">Sign in</button>
+                        <button id="submit" type="submit" class="btn btn-primary" >Sign in</button>
                     </form>
                 </div>
             </div>
@@ -50,6 +50,6 @@
     <!--Footer-->
     <div th:replace="footer_new.html :: footer"></div>
 </div>
-<script src="/static/js/registration.js" type="text/javascript" defer></script>
+<!-- <script src="/static/js/registration.js" type="text/javascript" defer></script> -->
 </body>
 </html>
