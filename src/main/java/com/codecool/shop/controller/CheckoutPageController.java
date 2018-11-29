@@ -20,9 +20,12 @@ public class CheckoutPageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         //TODO
-        User user = ShoppingCartContentHandler.getUser(req);
-
         resp.setContentType("charset=UTF-8");
+
+        User user = ShoppingCartContentHandler.getUser(req);
+        if (user == null) {
+          resp.sendRedirect("/login");
+        }
         userCart = ShoppingCartContentHandler.getShoppingCart(user);
         HashMap productHashMap = userCart.getProducts();
 
@@ -31,12 +34,12 @@ public class CheckoutPageController extends HttpServlet {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
+        context.setVariable("user", user.getName());
         context.setVariable("cartItems", userCart.getItemsNumber());
         context.setVariable("userCart", userCart);
         context.setVariable("products", products);
         context.setVariable("productHashMap", productHashMap);
         context.setVariable("page", "Checkout");
-        context.setVariable("user", user.getName());
 
         engine.process("checkout.html", context, resp.getWriter());
     }

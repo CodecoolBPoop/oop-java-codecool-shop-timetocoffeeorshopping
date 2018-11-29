@@ -49,11 +49,10 @@ public class LoginPage extends HttpServlet {
         if (isVerified) {
             String sessionID = request.getSession().getId();
             ExecuteQuery.getInstance().writeSessionIdToDatabase(email, sessionID);
-            engine.process("login.html", context, response.getWriter());
+            response.sendRedirect("/");
 
         } else {
             engine.process("login.html", context, response.getWriter());
         }
-        response.sendRedirect("/");
     }
 }

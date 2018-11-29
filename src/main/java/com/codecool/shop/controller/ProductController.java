@@ -5,6 +5,8 @@ import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.implementation.ShoppingCartDaoDB;
 import com.codecool.shop.model.Product;
+import com.codecool.shop.model.User;
+import com.codecool.shop.utility.ShoppingCartContentHandler;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -42,6 +44,14 @@ public class ProductController extends HttpServlet {
 
 // Telling the sidebar, which menu should be highlighted
         context.setVariable("page", "Store");
+        try {
+
+            User user = ShoppingCartContentHandler.getUser(req);
+            context.setVariable("user", user.getName());
+        } catch (Exception e) {
+            context.setVariable("user", "Guest");
+
+        }
 
         context.setVariable("categories", DataHandler.productCategoryDataStore.getAll());
         context.setVariable("suppliers", DataHandler.supplierDataStore.getAll());

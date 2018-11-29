@@ -29,6 +29,9 @@ public class ShoppingCartPageController extends HttpServlet {
         ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoDB.getInstance();
 
         User user = ShoppingCartContentHandler.getUser(req);
+        if (user == null) {
+            resp.sendRedirect("/login");
+        }
 
 
         ShoppingCart userCart = DataHandler.dbQuery.getUserCart(user);
