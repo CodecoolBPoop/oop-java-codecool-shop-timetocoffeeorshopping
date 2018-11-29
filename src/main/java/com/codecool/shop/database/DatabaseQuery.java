@@ -20,4 +20,6 @@ public interface DatabaseQuery {
 
     void removeProductFromCart(User user, Product product);
     ArrayList<Product> getAllProducts();
+    void editProductQuantityInCart(ShoppingCart cart, Product product, int count);
+    void removeProductFromCart(ShoppingCart cart, Product product);
 }

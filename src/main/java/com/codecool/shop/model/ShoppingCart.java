@@ -91,11 +91,7 @@ public class ShoppingCart {
     }
 
     public void editProductQuantity(Product product, int quantity){
-        if (quantity != 0){
-            products.put(product, quantity);
-        } else {
-            products.remove(product);
-        }
+
     }
 
 //    public void editNumOfProducts(Product product) {

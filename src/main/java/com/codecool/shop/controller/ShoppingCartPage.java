@@ -1,5 +1,6 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.config.DataHandler;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
@@ -8,6 +9,7 @@ import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ShoppingCart;
+import com.codecool.shop.model.User;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -16,6 +18,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.*;
 
@@ -26,26 +29,33 @@ public class ShoppingCartPage extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-//        ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
 
-//        ShoppingCart userCart = shoppingCartDataStore.getUserCart("sanya");
+        User user = DataHandler.dbQuery.getUserObjectByName("readdeo");
+        ShoppingCart userCart = DataHandler.dbQuery.getUserCart(user);
 
-//        HashMap productHashMap = userCart.getProducts();
+        System.out.println("usercart iD: " + userCart.getId());
 
-        List<Product> products = new ArrayList<Product>();
+        HashMap productHashMap = DataHandler.dbQuery.getProductsInCart(userCart.getId());
+        System.out.println("PROD HASH SIZE "+productHashMap.size());
 
-//        Iterator it = productHashMap.entrySet().iterator();
-//        while (it.hasNext()) {
-//            Map.Entry entry = (Map.Entry) it.next();
-//            products.add((Product) entry.getKey());
-//        }
+        Product[] products = new Product[productHashMap.size()];
+
+        Iterator it = productHashMap.entrySet().iterator();
+        int counter = 0;
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            System.out.println(pair.getKey() + " = " + pair.getValue());
+            Product product = (Product) pair.getKey();
+            products[counter] = product;
+            counter++;
+        }
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
-//        context.setVariable("userCart", userCart);
+        context.setVariable("userCart", userCart);
+        context.setVariable("productHashMap", productHashMap);
         context.setVariable("products", products);
-//        context.setVariable("productHashMap", productHashMap);
 
         // Getting number of items in the cart for the navbar
 //        context.setVariable("cartItems", userCart.getItemsNumber());
@@ -58,10 +68,9 @@ public class ShoppingCartPage extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-//        ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
 
-//        ShoppingCart userCart = shoppingCartDataStore.getUserCart("sanya");
+        User user = DataHandler.dbQuery.getUserObjectByName("readdeo");
+        ShoppingCart userCart = DataHandler.dbQuery.getUserCart(user);
 
         String command = req.getParameter("command");
         if (command.equals("editQuantity")) {
@@ -69,17 +78,18 @@ public class ShoppingCartPage extends HttpServlet {
             int productId = Integer.valueOf(req.getParameter("product").substring(6));
             int newQuantity = Integer.valueOf(req.getParameter("newQuantity"));
 
-            Product prod = productDataStore.find(productId);
+            Product prod = DataHandler.dbQuery.getProduct(productId);
 
-//            userCart.editProductQuantity(prod, newQuantity);
+            System.out.println("prod:"+prod + " usercart "+ userCart);
+
+            DataHandler.dbQuery.editProductQuantityInCart(userCart, prod, newQuantity);
 
         } else if (command.equals("removeProduct")) {
             System.out.println("REMOVE:" + req.getParameter("product"));
             int productId = Integer.valueOf(req.getParameter("product"));
 
-            Product prod = productDataStore.find(productId);
-
-//            userCart.removeProduct(prod);
+            Product prod = DataHandler.dbQuery.getProduct(productId);
+            DataHandler.dbQuery.removeProductFromCart(userCart, prod);
         }
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());

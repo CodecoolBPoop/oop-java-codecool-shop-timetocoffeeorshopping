@@ -143,7 +143,7 @@ public class ExecuteQuery implements DatabaseQuery {
     public HashMap<Product, Integer> getProductsInCart(int id) {
         HashMap<Product, Integer> products = new HashMap<Product, Integer>();
         try {
-            String sql = "SELECT * FROM cart_items WHERE id = " + id + ";";
+            String sql = "SELECT * FROM cart_items WHERE shoppingcart = " + id + ";";
             ResultSet rs = DataHandler.dbHandler.getResultSetForQuery(sql);
 
             while (rs.next()) {
@@ -288,8 +288,45 @@ public class ExecuteQuery implements DatabaseQuery {
         return null;
     }
 
-    private void closeResultset(ResultSet rs) throws SQLException {
-        rs.getStatement().close();
-        rs.close();
+    @Override
+    public void editProductQuantityInCart(ShoppingCart cart, Product product, int count) {
+
+        System.out.println("CART ID ADD " + cart.getId());
+
+        try {
+            String sql = "UPDATE cart_items SET number_of_product = "+count+" WHERE shoppingcart = "+cart.getId()+" AND product = "+product.getId()+";";
+//            sql= "INSERT INTO cart_items VALUES (1,1,1);";
+            System.out.println(sql);
+            ResultSet rs = DataHandler.dbHandler.getResultSetForQuery(sql);
+            //Clean-up environment
+            closeResultset(rs);
+        } catch (Exception e) {
+            System.out.println("Exception editProductQuantityInCart: " + e);
+        }
+    }
+
+    @Override
+    public void removeProductFromCart(ShoppingCart cart, Product product) {
+
+        System.out.println("CART ID ADD " + cart.getId());
+
+        try {
+            String sql = "DELETE FROM cart_items WHERE shoppingcart = "+cart.getId()+" AND product = "+product.getId()+";";
+            System.out.println(sql);
+            ResultSet rs = DataHandler.dbHandler.getResultSetForQuery(sql);
+            //Clean-up environment
+            closeResultset(rs);
+        } catch (Exception e) {
+            System.out.println("Exception editProductQuantityInCart: " + e);
+        }
+    }
+
+    private void closeResultset(ResultSet rs) {
+        try {
+            rs.getStatement().close();
+            rs.close();
+        } catch (Exception e){
+            System.out.println(e);
+        }
     }
 }
