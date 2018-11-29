@@ -23,6 +23,7 @@ public class LoginPage extends HttpServlet {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
         WebContext context = new WebContext(request, response, request.getServletContext());
         context.setVariable("page", "Login");
+
         engine.process("login.html", context, response.getWriter());
     }
 
@@ -53,5 +54,6 @@ public class LoginPage extends HttpServlet {
         } else {
             engine.process("login.html", context, response.getWriter());
         }
+        response.sendRedirect("/");
     }
 }

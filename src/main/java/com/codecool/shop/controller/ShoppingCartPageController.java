@@ -51,6 +51,7 @@ public class ShoppingCartPageController extends HttpServlet {
 
         // Telling the sidebar, which menu should be highlighted
         context.setVariable("page", "Your shopping cart");
+        context.setVariable("user", user.getName());
 
         engine.process("cart.html", context, resp.getWriter());
     }

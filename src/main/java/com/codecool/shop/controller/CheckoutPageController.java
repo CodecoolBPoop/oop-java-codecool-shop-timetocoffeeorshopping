@@ -36,6 +36,7 @@ public class CheckoutPageController extends HttpServlet {
         context.setVariable("products", products);
         context.setVariable("productHashMap", productHashMap);
         context.setVariable("page", "Checkout");
+        context.setVariable("user", user.getName());
 
         engine.process("checkout.html", context, resp.getWriter());
     }
