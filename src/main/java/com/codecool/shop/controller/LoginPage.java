@@ -1,5 +1,6 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.database.implementation.ExecuteQuery;
 import com.codecool.shop.password.HashAndAuthenticate;
 import com.codecool.shop.config.TemplateEngineUtil;
 import org.thymeleaf.TemplateEngine;
@@ -45,9 +46,8 @@ public class LoginPage extends HttpServlet {
 
 
         if (isVerified) {
-            HttpSession session = request.getSession();
-            String sessionID = session.getId();
-//            adatbázisba kiírni
+            String sessionID = request.getSession().getId();
+            ExecuteQuery.getInstance().writeSessionIdToDatabase(email, sessionID);
             engine.process("login.html", context, response.getWriter());
 
         } else {
