@@ -5,8 +5,6 @@ import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.implementation.ShoppingCartDaoDB;
 import com.codecool.shop.model.Product;
-import com.codecool.shop.model.ShoppingCart;
-import com.codecool.shop.model.User;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
