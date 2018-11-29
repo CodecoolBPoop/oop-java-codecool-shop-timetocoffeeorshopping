@@ -32,7 +32,7 @@ public class OrderDaoMem implements OrderDao {
 
         Order newOrder = new Order();
         newOrder.setUser(user);
-        newOrder.setShoppingCart(user);
+//        newOrder.setShoppingCart(user);
 //        newOrder.setCustomer(User);
 
         orders.add(newOrder);

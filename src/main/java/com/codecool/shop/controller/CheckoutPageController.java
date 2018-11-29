@@ -1,10 +1,7 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
-import com.codecool.shop.model.Customer;
-import com.codecool.shop.model.Order;
-import com.codecool.shop.model.Product;
-import com.codecool.shop.model.ShoppingCart;
+import com.codecool.shop.model.*;
 import com.codecool.shop.utility.ShoppingCartContentHandler;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -23,7 +20,7 @@ public class CheckoutPageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         //TODO
-        String user = "sanya";
+        User user = ShoppingCartContentHandler.getUser(req);
 
         resp.setContentType("charset=UTF-8");
         userCart = ShoppingCartContentHandler.getShoppingCart(user);

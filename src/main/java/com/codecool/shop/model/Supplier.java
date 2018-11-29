@@ -4,9 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Supplier extends BaseModel {
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    private int id;
     private List<Product> products;
 
-    public Supplier(String name, String description) {
+    public Supplier(int id, String name, String description) {
         super(name);
         this.products = new ArrayList<>();
     }

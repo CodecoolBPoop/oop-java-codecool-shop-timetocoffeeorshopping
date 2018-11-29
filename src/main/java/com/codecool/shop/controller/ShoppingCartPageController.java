@@ -1,12 +1,15 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.config.DataHandler;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.ShoppingCartDao;
+import com.codecool.shop.dao.implementation.ProductDaoDB;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
-import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
+import com.codecool.shop.dao.implementation.ShoppingCartDaoDB;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ShoppingCart;
+import com.codecool.shop.model.User;
 import com.codecool.shop.utility.ShoppingCartContentHandler;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -23,9 +26,13 @@ public class ShoppingCartPageController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
+        ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoDB.getInstance();
 
-        ShoppingCart userCart = shoppingCartDataStore.getUserCart("sanya");
+        User user = ShoppingCartContentHandler.getUser(req);
+
+
+        ShoppingCart userCart = DataHandler.dbQuery.getUserCart(user);
+//        ShoppingCart userCart = shoppingCartDataStore.getUserCart("sanya");
 
         HashMap productHashMap = userCart.getProducts();
 
@@ -50,10 +57,11 @@ public class ShoppingCartPageController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
+        ProductDao productDataStore = ProductDaoDB.getInstance();
+//        ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoDB.getInstance();
+        User user = ShoppingCartContentHandler.getUser(req);
 
-        ShoppingCart userCart = shoppingCartDataStore.getUserCart("sanya");
+        ShoppingCart userCart = DataHandler.dbQuery.getUserCart(user);
 
         String command = req.getParameter("command");
         if (command.equals("editQuantity")) {

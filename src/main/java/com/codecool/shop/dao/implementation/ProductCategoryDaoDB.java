@@ -42,6 +42,6 @@ public class ProductCategoryDaoDB implements ProductCategoryDao {
 
     @Override
     public List<ProductCategory> getAll() {
-        return null;
+        return DataHandler.dbQuery.getCategories();
     }
 }

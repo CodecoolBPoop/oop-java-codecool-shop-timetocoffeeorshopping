@@ -1,6 +1,6 @@
 package com.codecool.shop.model;
 
-import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
+import com.codecool.shop.dao.implementation.ShoppingCartDaoDB;
 
 import java.util.List;
 
@@ -23,10 +23,10 @@ public class Order {
 //        id += 1;
     }
 
-    public ShoppingCart setShoppingCart(String user) {
-        shoppingCart = ShoppingCartDaoMem.getInstance().getUserCart(user);
-        return shoppingCart;
-    }
+//    public ShoppingCart setShoppingCart(String user) {
+//        shoppingCart = ShoppingCartDaoMem.getInstance().getUserCart(user);
+//        return shoppingCart;
+//    }
 
     public String getUser() {
         return user;

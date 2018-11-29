@@ -5,6 +5,7 @@ import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.dao.implementation.OrderDaoMem;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.ShoppingCart;
+import com.codecool.shop.model.User;
 import com.codecool.shop.utility.ShoppingCartContentHandler;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -20,7 +21,11 @@ public class PaymentPageController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String user = "sanya";
+        String userName = ShoppingCartContentHandler.getUserName(req);
+        User user = ShoppingCartContentHandler.getUser(req);
+        System.out.println("user:::" +userName);
+
+
 
         resp.setContentType("charset=UTF-8");
         ShoppingCart userCart = ShoppingCartContentHandler.getShoppingCart(user);
@@ -34,13 +39,14 @@ public class PaymentPageController extends HttpServlet {
 
         context.setVariable("totalPrice", userCart.getTotalPrice());
         context.setVariable("page", "Payment");
+        context.setVariable("user", userName);
         engine.process("payment.html", context, resp.getWriter());
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-//        this.doGet(req, resp);
-        String user = "sanya";
+        String user = ShoppingCartContentHandler.getUserName(req);
+
         OrderDao orderDataStore = OrderDaoMem.getInstance();
         Order userOrder = orderDataStore.getUserOrder(user);
         userOrder.isProcessed();
