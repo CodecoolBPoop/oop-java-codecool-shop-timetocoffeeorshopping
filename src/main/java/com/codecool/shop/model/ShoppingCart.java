@@ -44,8 +44,9 @@ public class ShoppingCart {
     }
 
     public void isProcessed() {
-        this.isActive = false;
-        orderPlacedDate = LocalDateTime.now();
+        DataHandler.dbQuery.removeAllProductsFromCart(this);
+//        this.isActive = false;
+//        orderPlacedDate = LocalDateTime.now();
     }
 
     public HashMap getProducts() {

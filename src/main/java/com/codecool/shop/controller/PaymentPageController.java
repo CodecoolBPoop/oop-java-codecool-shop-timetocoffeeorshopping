@@ -1,5 +1,6 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.config.DataHandler;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.dao.implementation.OrderDaoMem;
@@ -49,7 +50,7 @@ public class PaymentPageController extends HttpServlet {
 
         OrderDao orderDataStore = OrderDaoMem.getInstance();
         Order userOrder = orderDataStore.getUserOrder(user);
-        userOrder.isProcessed();
+        DataHandler.dbQuery.removeAllProductsFromCart(DataHandler.dbQuery.getUserCart(DataHandler.dbQuery.getUserObjectBySession(req.getSession().getId())));
         userOrder.setIsPayed(true);
         resp.sendRedirect("/");
     }

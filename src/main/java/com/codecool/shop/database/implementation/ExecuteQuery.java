@@ -397,4 +397,20 @@ public class ExecuteQuery implements DatabaseQuery {
         }
 
     }
+
+    @Override
+    public void removeAllProductsFromCart(ShoppingCart cart) {
+
+        System.out.println("CART ID ADD " + cart.getId());
+
+        try {
+            String sql = "DELETE FROM cart_items WHERE shoppingcart = "+cart.getId()+";";
+            System.out.println(sql);
+            ResultSet rs = DataHandler.dbHandler.getResultSetForQuery(sql);
+            //Clean-up environment
+            closeResultset(rs);
+        } catch (Exception e) {
+            System.out.println("Exception editProductQuantityInCart: " + e);
+        }
+    }
 }
