@@ -44,6 +44,7 @@ public class ShoppingCart {
     }
 
     public void isProcessed() {
+        DataHandler.dbQuery.removeAllProductsFromCart(this);
         this.isActive = false;
         orderPlacedDate = LocalDateTime.now();
     }
