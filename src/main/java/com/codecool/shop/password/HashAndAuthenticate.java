@@ -13,8 +13,7 @@ public class HashAndAuthenticate {
     }
 
     public static boolean verifyPassword(String email, String passwordForVerification) throws NoSuchAlgorithmException {
-        ExecuteQuery executeQuery = ExecuteQuery.getInstance();
-        User user = executeQuery.getUserObjectByEmail(email);
+        User user = ExecuteQuery.getInstance().getUserObjectByEmail(email);
         String storagedPassword = user.getPassword();
         passwordForVerification = getSecurePassword(passwordForVerification);
         if (storagedPassword.equals(passwordForVerification)) {
