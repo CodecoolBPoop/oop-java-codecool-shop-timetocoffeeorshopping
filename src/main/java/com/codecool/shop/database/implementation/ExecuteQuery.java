@@ -383,16 +383,15 @@ public class ExecuteQuery implements DatabaseQuery {
 
     public void writeSessionIdToDatabase(String email, String sessionId) {
         try {
-            String query = "SELECT * FROM auth_user WHERE email = ? " +
-                    "INSERT INTO auth_user(session_id) VALUES (?) ";
+            String query = "UPDATE auth_user SET session_id=? WHERE email= ? ";
 
-            try (PreparedStatement statement = DatabaseConnection.conn.prepareStatement(query)) {
+            PreparedStatement statement = DatabaseConnection.conn.prepareStatement(query);
 
-                statement.setString(1, email);
-                statement.setString(2, sessionId);
+                statement.setString(2, email);
+                statement.setString(1, sessionId);
                 System.out.println(statement);
                 statement.executeUpdate();
-            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
